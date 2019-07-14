@@ -30,30 +30,8 @@ Manam is IDaaS (Identity as a service).
 
 
 ```shell
-http -p BHbh OPTIONS https://manam.ir/auth/register 
 
-OPTIONS /auth/register HTTP/1.1
-Accept: */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 0
-Host: localhost:3000
-User-Agent: HTTPie/0.9.9
-
-HTTP/1.1 200 OK
-Content-Length: 0
-Date: Tue, 09 Oct 2018 20:13:59 GMT
-Set-Cookie: csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=; Max-Age=31536000
-Vary: Cookie
-X-Csrf-Token: ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg== 
-
-```
-
-> Use above command to get cookie and X-Csrf-token
-
-```shell
-
-curl -X POST -H "Content-Type: application/json" -H "customer_token:cus-token" -H "Cookie:csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=" -H "X-Csrf-Token:ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg==" https://api.manam.ir/auth/register -d '{"name": "myyname","email": "myemail@mail.com","password":"password","confirm_password":"password"}'
+curl -X POST -H "Content-Type: application/json" -H "customer_token:cus-token"  https://api.manam.ir/auth/register -d '{"name": "myyname","email": "myemail@mail.com","password":"password","confirm_password":"password"}'
 
 ```
 
@@ -63,8 +41,6 @@ $.ajax({
     headers: {
                 'customer_token': 'cus_token',
          
-                'Cookie': 'csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=',
-                'X-Csrf-Token':'ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg=='
             },
     dataType: "json",
     type : "POST",
@@ -78,13 +54,17 @@ $.ajax({
 > The above command returns JSON structured like this:
 
 ```json
+
 {
+    "auth_token": "...",
+    "refresh_token": "...",
     "username": "",
     "fullname": "",
     "email": "",
     "roles": [],
     "permissions": []
 }
+
 ```
 
 This endpoint register user in Manam.
@@ -158,30 +138,10 @@ customer_token | The token that specific for each customer
 ## Login
 
 
-```shell
-http -p BHbh OPTIONS https://api.manam.ir/auth/login 
-
-OPTIONS /auth/login HTTP/1.1
-Accept: */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 0
-Host: localhost:3000
-User-Agent: HTTPie/0.9.9
-
-HTTP/1.1 200 OK
-Content-Length: 0
-Date: Tue, 09 Oct 2018 20:30:11 GMT
-Set-Cookie: csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=; Max-Age=31536000
-Vary: Cookie
-X-Csrf-Token: 5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA==
-```
-
-> Use above command to get cookie and X-Csrf-token
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" -H "Cookie:csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" -H "X-Csrf-Token:5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA==" https://api.manam.ir/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
+curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" https://api.manam.ir/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
 
 ```
 
@@ -190,8 +150,6 @@ curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" -
     url: "https://api.manam.ir/auth/login",
     headers: {
                 'customer_token': 'cus_token',
-                'Cookie': 'csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=',
-                'X-Csrf-Token':'5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA=='
             },
     dataType: "json",
     type : "POST",
@@ -243,7 +201,7 @@ customer_token | The token is specific for customer
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" -H "Cookie:csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" -H "X-Csrf-Token:5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA==" https://api.manam.ir/auth/recover -d '{"email": "myemail@mail.com"}'
+curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" https://api.manam.ir/auth/recover -d '{"email": "myemail@mail.com"}'
 
 
 ```
@@ -254,8 +212,7 @@ $.ajax({
     headers: {
                 'customer_token': 'cus_token',
                 'auth_token':"..."
-                'Cookie': 'csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=',
-                'X-Csrf-Token':'5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA=='
+              
             },
     dataType: "json",
     type : "POST",
