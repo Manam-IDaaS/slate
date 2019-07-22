@@ -44,7 +44,10 @@ $.ajax({
             },
     dataType: "json",
     type : "POST",
-    data: {name:"myname", email:"myemail@mail.com", password:"password", confirm_password:"password", 
+    data: {name:"myname",
+    email:"myemail@mail.com",
+    password:"password",
+    confirm_password:"password", 
     "meli_code":"12907652", 
     "picture":"butypic",
     "address":"Tehran, saadat Abad",
@@ -85,7 +88,7 @@ This endpoint register user in Manam.
 
 ### HTTP Request
 
-`POST https://api.manam.ir/auth/register`
+`POST https://api.apieco.ir/manam/auth/register`
 
 ### Query Parameters
 None.
@@ -113,7 +116,7 @@ mobile | string
 telephone | string
 
 
-## Confirm
+## Confirm  
 
 ```shell
 
@@ -122,7 +125,7 @@ curl -X GET -H "Content-Type: application/json" -H "customer_token:cus-token" ht
 
 ```javascript
 $.ajax({
-    url: "https://api.manam.ir/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
+    url: "  https://api.manam.ir/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
     headers: {
                 'customer_token': 'cus_token',
             },
