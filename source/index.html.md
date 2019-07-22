@@ -31,20 +31,34 @@ Manam is IDaaS (Identity as a service).
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "customer_token:cus-token"  https://api.manam.ir/auth/register -d '{"name": "myyname","email": "myemail@mail.com","password":"password","confirm_password":"password"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://api.apieco.ir/manam/auth/register -d '{"name": "myyname","email": "jik.jeek2018@gmail.com","password":"12345","confirm_password":"12345","meli_code":"12907652", "picture":"butypic","address":"Tehran, saadat Abad", "postal_code":"postal_code","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document","mobile":"09111087815","telephone":"88828919"}'
 
 ```
 
 ```javascript
 $.ajax({
-    url: "https://api.manam.ir/auth/register",
+    url: "https://api.apieco.ir/manam/auth/register",
     headers: {
-                'customer_token': 'cus_token',
+                'apieco_key': '1234',
          
             },
     dataType: "json",
     type : "POST",
-    data: {name:"myname", email:"myemail@mail.com", password:"password", confirm_password:"password", "customer_token":"cus_token"}
+    data: {name:"myname", email:"myemail@mail.com", password:"password", confirm_password:"password", 
+    "meli_code":"12907652", 
+    "picture":"butypic",
+    "address":"Tehran, saadat Abad",
+    "postal_code":"postal_code",
+    "birthday":"1990-02-1",
+    "marital_status":"single",
+    "facebook_id":"facebook_id"
+    "instagram_id":"instagram_id",
+    "twitter_id":"twitter_id",
+    "linkedIn_id":"linkedIn_id",
+    "document":"document",
+    "mobile":"09111087815",
+    "telephone":"88828919"
+     }
     success : function(r) {
       console.log(r);
     }
@@ -82,11 +96,21 @@ None.
 Parameter | Type 
 --------- | ------- 
 name | string
-email | [string] 
-password | [string]
-confirm_password | string
-
-
+email | [string] *
+password | [string]*
+confirm_password | string*
+meli_code | string
+picture | string
+address | string
+birthday | date
+marital_status | string
+facebook_id | string
+instagram_id | string
+twitter_id | string
+linkedIn_id | string
+document | string
+mobile | string
+telephone | string
 
 
 ## Confirm
