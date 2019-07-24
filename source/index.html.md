@@ -153,14 +153,13 @@ This endpoint confirm users on Manam.
 
 ### HTTP Request
 
-`GET https://api.apieco.ir/manam/auth/confirm/<cnf>/<customer_token>`
+`GET https://api.apieco.ir/manam/auth/confirm/<cnf>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
 cnf | The string that confirm registartion
-customer_token | The token that specific for each customer
 
 ## Login
 
@@ -299,6 +298,43 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" -H "auth_t
 ```
 
 This endpoint RefreshToken create new refresh token for users.
+
+
+
+## Get Manam User Info
+
+
+```shell
+
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:1234"  https://api.apieco.ir/manam/get_manam_user_info/<email>
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+   
+}
+```
+
+This endpoint display Manam user information.
+
+### HTTP Request
+
+`GET https://api.apieco.ir/manam/auth/get_manam_user_info/<email>`
+
+
+### Data Params
+None.
+
+
+### Query Parameters
+
+Parameter | Type 
+--------- | ------- 
+email | [string] *
+
 
 
 ## Google Login (oauth2)
