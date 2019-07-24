@@ -274,7 +274,6 @@ None.
 Parameter | Description
 --------- | -----------
 email | The email that register 
-apieco_key | The token is specific for customer
 
 
 ## Refresh Token
@@ -298,6 +297,67 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" -H "auth_t
 ```
 
 This endpoint RefreshToken create new refresh token for users.
+
+## View User
+
+```shell
+
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:1234"  https://api.apieco.ir/manam/view_user/<email>
+
+
+```
+
+```javascript
+$.ajax({
+    url: "https://api.apieco.ir/manam/view_user",
+    headers: {
+                "apieco_key":"1234"
+                
+            },
+    dataType: "json",
+    type : "GET",
+    success : function(r) {
+      console.log(r);
+    }
+  });
+  ```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+'{"email":"...",
+  "meli_code":"...",
+  "picture":"...",
+  "address":"...",
+  "postal_code":"...",
+  "birthday":"...",
+  "marital_status":"...",
+  "facebook_id":"...",
+  "instagram_id":"...",
+  "twitter_id":"...",
+  "linkedIn_id":"...",
+  "document":"...",
+  "mobile":"...",
+  "telephone":"..."}'
+}
+```
+
+This endpoint display user info user.
+
+### HTTP Request
+
+`POST https://api.apieco.ir/manam/auth/recover`
+
+### URL Parameters
+
+None.
+
+### Data Parameters
+
+Parameter | Description
+--------- | -----------
+email | The email that register 
 
 
 
