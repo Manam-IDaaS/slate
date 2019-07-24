@@ -120,14 +120,14 @@ telephone | string
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "customer_token:cus-token" https://api.manam.ir/auth/confirm -d {cnf:h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==}
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:1234" https://api.apieco.ir/manam/auth/confirm -d {cnf:h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==}
 ```
 
 ```javascript
 $.ajax({
-    url: "  https://api.manam.ir/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
+    url: "  https://api.apieco.ir/manam/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
     headers: {
-                'customer_token': 'cus_token',
+                "apieco_key":"1234"
             },
     dataType: "json",
     type : "GET",
@@ -153,7 +153,7 @@ This endpoint confirm users on Manam.
 
 ### HTTP Request
 
-`GET https://api.manam.ir/auth/confirm/<cnf>/<customer_token>`
+`GET https://api.apieco.ir/manam/auth/confirm/<cnf>/<customer_token>`
 
 ### URL Parameters
 
@@ -168,15 +168,15 @@ customer_token | The token that specific for each customer
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" https://api.manam.ir/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://api.apieco.ir/manam/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
 
 ```
 
 ```javascript
  $.ajax({
-    url: "https://api.manam.ir/auth/login",
-    headers: {
-                'customer_token': 'cus_token',
+    url: "https://api.apieco.ir/manam/auth/login",
+    headers: {                
+                "apieco_key":"1234"
             },
     dataType: "json",
     type : "POST",
@@ -207,7 +207,7 @@ This endpoint login user on Manam.
 
 ### HTTP Request
 
-`POST https://api.manam.ir/auth/login`
+`POST https://api.apieco.ir/manam/auth/login`
 
 ### URL Parameters
 
@@ -228,16 +228,16 @@ customer_token | The token is specific for customer
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" https://api.manam.ir/auth/recover -d '{"email": "myemail@mail.com"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://api.apieco.ir/manam/auth/recover -d '{"email": "myemail@mail.com"}'
 
 
 ```
 
 ```javascript
 $.ajax({
-    url: "https://api.manam.ir/auth/recover",
+    url: "https://api.apieco.ir/manam/auth/recover",
     headers: {
-                'customer_token': 'cus_token',
+                "apieco_key":"1234"
                 'auth_token':"..."
               
             },
@@ -264,7 +264,7 @@ This endpoint recover user on Manam.
 
 ### HTTP Request
 
-`POST https://api.manam.ir/auth/recover`
+`POST https://api.apieco.ir/manam/auth/recover`
 
 ### URL Parameters
 
@@ -275,7 +275,7 @@ None.
 Parameter | Description
 --------- | -----------
 email | The email that register 
-customer_token | The token is specific for customer
+apieco_key | The token is specific for customer
 
 
 ## Refresh Token
@@ -283,7 +283,7 @@ customer_token | The token is specific for customer
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" -H "auth_token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s" -H "refresh_token:fdb8fdbecf1d03ce5e6125c067733c0d51de209c" https://api.manam.ir/auth/refreshToken 
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" -H "auth_token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s" -H "refresh_token:fdb8fdbecf1d03ce5e6125c067733c0d51de209c" https://api.apieco.ir/manam/auth/refreshToken 
 
 
 ```
@@ -302,7 +302,7 @@ This endpoint RefreshToken create new refresh token for users.
 
 
 ## Google Login (oauth2)
-Use this link `<a href="https://api.manam.ir/googlelogin/[customer-token]">Google Log In</a>`
+Use this link `<a href="https://api.apieco.ir/manam/googlelogin/[apieco_key]">Google Log In</a>`
 
 Contact to admin for give customer-token
 
