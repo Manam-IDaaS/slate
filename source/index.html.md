@@ -31,7 +31,7 @@ Manam is IDaaS (Identity as a service).
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://api.apieco.ir/manam/auth/register -d '{"name": "myyname","email": "jik.jeek2018@gmail.com","password":"12345","confirm_password":"12345","meli_code":"12907652", "picture":"butypic","address":"Tehran, saadat Abad", "postal_code":"postal_code","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document","mobile":"09111087815","telephone":"88828919"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/register -d '{"name": "myyname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","meli_code":"12907652", "picture":"butypic","address":"Tehran, saadat Abad", "postal_code":"postal_code","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document","mobile":"09111087815","telephone":"88828919"}'
 
 ```
 
@@ -39,7 +39,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://ap
 $.ajax({
     url: "https://api.apieco.ir/manam/auth/register",
     headers: {
-                'apieco_key': '1234',
+                'apieco_key': '<apieco_key>',
          
             },
     dataType: "json",
@@ -120,14 +120,14 @@ telephone | string
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:1234" https://api.apieco.ir/manam/auth/confirm -d {cnf:h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==}
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/confirm -d {cnf:h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==}
 ```
 
 ```javascript
 $.ajax({
     url: "  https://api.apieco.ir/manam/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
     headers: {
-                "apieco_key":"1234"
+                "apieco_key":"<apieco_key>"
             },
     dataType: "json",
     type : "GET",
@@ -167,7 +167,7 @@ cnf | The string that confirm registartion
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://api.apieco.ir/manam/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
 
 ```
 
@@ -175,7 +175,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://ap
  $.ajax({
     url: "https://api.apieco.ir/manam/auth/login",
     headers: {                
-                "apieco_key":"1234"
+                "apieco_key":"<apieco_key>"
             },
     dataType: "json",
     type : "POST",
@@ -227,7 +227,7 @@ customer_token | The token is specific for customer
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://api.apieco.ir/manam/auth/recover -d '{"email": "myemail@mail.com"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/recover -d '{"email": "myemail@mail.com"}'
 
 
 ```
@@ -236,7 +236,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" https://ap
 $.ajax({
     url: "https://api.apieco.ir/manam/auth/recover",
     headers: {
-                "apieco_key":"1234"
+                "apieco_key":"<apieco_key>"
                 'auth_token':"..."
               
             },
@@ -281,7 +281,7 @@ email | The email that register
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:1234" -H "auth_token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s" -H "refresh_token:fdb8fdbecf1d03ce5e6125c067733c0d51de209c" https://api.apieco.ir/manam/auth/refreshToken 
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "auth_token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s" -H "refresh_token:fdb8fdbecf1d03ce5e6125c067733c0d51de209c" https://api.apieco.ir/manam/auth/refreshToken 
 
 
 ```
@@ -302,7 +302,7 @@ This endpoint RefreshToken create new refresh token for users.
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:1234"  https://api.apieco.ir/manam/view_user/<email>
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/view_user/<email>
 
 
 ```
@@ -311,7 +311,7 @@ curl -X GET -H "Content-Type: application/json" -H "apieco_key:1234"  https://ap
 $.ajax({
     url: "https://api.apieco.ir/manam/view_user",
     headers: {
-                "apieco_key":"1234"
+                "apieco_key":"<apieco_key>"
                 
             },
     dataType: "json",
@@ -366,7 +366,7 @@ email | The email that register
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:1234"  https://api.apieco.ir/manam/get_manam_user_info/<email>
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/get_manam_user_info/<email>
 
 ```
 
