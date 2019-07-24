@@ -326,7 +326,7 @@ $.ajax({
 
 ```json
 {
-'{"email":"...",
+  {"email":"...",
   "meli_code":"...",
   "picture":"...",
   "address":"...",
@@ -375,7 +375,7 @@ curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  ht
 ```json
 
 {
-        ""email":"...",
+        "email":"...",
         "meli_code":"...",
         "picture":"...",
         "address":"...",
