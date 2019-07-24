@@ -373,10 +373,48 @@ curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  ht
 > The above command returns JSON structured like this:
 
 ```json
+
 {
+        ""email":"...",
+        "meli_code":"...",
+        "picture":"...",
+        "address":"...",
+        "postal_code":"...",
+        "birthday":"...",
+        "marital_status":"...",
+        "facebook_id":"...",
+        "instagram_id":"...",
+        "twitter_id":"...",
+        "linkedIn_id":"...",
+        "document":"...",
+        "mobile":"...",
+        "telephone":"..."
    
 }
+
 ```
+or for google users
+```json
+{
+        "ageRanges":"",
+				"CoverPhotos":""
+				"Photos":"",
+				"Locales":"",
+	      //name
+				"DisplayName":"",
+				"FamilyName":"",
+				"GivenName":"",
+				"DisplayNameLastFirst":"",
+				//birthday
+				"BirthdayDay":"",
+				"BirthdayMonth":"",
+				"BirthdayYear":"",
+				"Email":"",
+   
+}
+
+```
+
 
 This endpoint display Manam user information.
 
