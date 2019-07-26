@@ -361,6 +361,83 @@ email | The email that register
 
 
 
+
+## Edit User
+
+```shell
+
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/edit_user -d '{"email":"mytest@gmail.com","melicode":"12344", "picture":"butypic","address":"address", "postal_code":"posss","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document1","mobile":"091223423","telephone":"091383184"}'
+
+
+```
+
+```javascript
+$.ajax({
+    url: "https://api.apieco.ir/manam/edit_user",
+    headers: {
+                "apieco_key":"<apieco_key>"
+                
+            },
+    dataType: "json",
+    type : "POST",
+    data: {"email":"mytest@gmail.com",
+           "melicode":"12344",
+           "picture":"butypic",
+           "address":"address",
+           "postal_code":"posss",
+           "birthday":"1990-01-02",
+           "marital_status":"single",
+           "facebook_id":"facebook_id",
+           "instagram_id":"instagram_id",
+           "twitter_id":"twitter_id",
+           "linkedIn_id":"linkedIn_id",
+           "document":"document1",
+           "mobile":"091223423",
+           "telephone":"091383184"}
+    success : function(r) {
+      console.log(r);
+    }
+  });
+  ```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  {"email":"...","Name":"..."}'
+}
+```
+
+This endpoint edit user information.
+
+### HTTP Request
+
+`POST https://api.apieco.ir/manam/edit_user`
+
+### URL Parameters
+
+None.
+
+### Data Parameters
+
+Parameter | Description
+--------- | -----------
+email* | The email that register 
+melicode |
+picture | 
+address | 
+postal_code | 
+birthday | 
+marital_status |
+facebook_id | 
+instagram_id |
+twitter_id |
+linkedIn_id | 
+document | 
+mobile | 
+telephone | 
+
+
 ## Get Manam User Info
 
 
