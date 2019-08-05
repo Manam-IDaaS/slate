@@ -26,12 +26,12 @@ We have language bindings in Shell (for shell use httpie (https://httpie.org/) )
 
 Manam is IDaaS (Identity as a service).
 
-## Register
+## Register [IDaaS]
 
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/register -d '{"name": "myyname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","meli_code":"12907652", "picture":"butypic","address":"Tehran, saadat Abad", "postal_code":"postal_code","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document","mobile":"09111087815","telephone":"88828919"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/register -d '{"userType":"[email|mobile]","name": "myyname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","meli_code":"12907652", "picture":"butypic","address":"Tehran, saadat Abad", "postal_code":"postal_code","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document","mobile":"09111087815","telephone":"88828919"}'
 
 ```
 
@@ -44,7 +44,9 @@ $.ajax({
             },
     dataType: "json",
     type : "POST",
-    data: {name:"myname",
+    data: {
+    userType:"[email|mobile]",
+    name:"myname",
     email:"myemail@mail.com",
     password:"password",
     confirm_password:"password", 
@@ -116,11 +118,11 @@ mobile | string
 telephone | string
 
 
-## Confirm  
+## Confirm  [IDaaS]
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/confirm -d {cnf:h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==}
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/confirm -d {cnf:"h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==","url":"[url]"}
 ```
 
 ```javascript
@@ -161,13 +163,13 @@ Parameter | Description
 --------- | -----------
 cnf | The string that confirm registartion
 
-## Login
+## Login [IDaaS]
 
 
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/login -d '{"userType":"[email|mobile]","username": "myemail@mail.com","password":"password"}'
 
 ```
 
@@ -223,7 +225,7 @@ customer_token | The token is specific for customer
 
 
 
-## Recover
+## Recover [IDaaS]
 
 ```shell
 
@@ -298,7 +300,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H
 
 This endpoint RefreshToken create new refresh token for users.
 
-## View User
+## View User [IDaaS]
 
 ```shell
 
@@ -362,11 +364,11 @@ email | The email that register
 
 
 
-## Edit User
+## Edit User [IDaaS]
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/edit_user -d '{"email":"mytest@gmail.com","melicode":"12344", "picture":"butypic","address":"address", "postal_code":"posss","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document1","mobile":"091223423","telephone":"091383184"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/edit_user -d '{"userType":"[email|mobile]","email":"mytest@gmail.com","melicode":"12344", "picture":"butypic","address":"address", "postal_code":"posss","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document1","mobile":"091223423","telephone":"091383184"}'
 
 
 ```
@@ -380,7 +382,9 @@ $.ajax({
             },
     dataType: "json",
     type : "POST",
-    data: {"email":"mytest@gmail.com",
+    data: {
+            "userType":"[email|mobile]",
+            "email":"mytest@gmail.com",
            "melicode":"12344",
            "picture":"butypic",
            "address":"address",
@@ -423,6 +427,7 @@ None.
 Parameter | Description
 --------- | -----------
 email* | The email that register 
+userType*|[email|mobile]
 melicode |
 picture | 
 address | 
@@ -438,7 +443,32 @@ mobile |
 telephone | 
 
 
-## Get Manam User Info
+## Google Login (oauth2)[IDaaS]
+Use this link `<a href="https://api.apieco.ir/manam/googlelogin/[apieco_key]">Google Log In</a>`
+
+Contact to admin for give customer-token
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "auth_token": "...",
+    "username": "",
+    "fullname": "",
+    "email": "",
+    "roles": [],
+    "permissions": []
+    //... other user info
+}
+
+
+```
+
+
+
+
+
+## Get Manam User Info [Manam]
 
 
 ```shell
@@ -511,10 +541,7 @@ Parameter | Type
 email | [string] *
 
 
+## Login with Manam [Manam]
 
-## Google Login (oauth2)
-Use this link `<a href="https://api.apieco.ir/manam/googlelogin/[apieco_key]">Google Log In</a>`
-
-Contact to admin for give customer-token
 
 
