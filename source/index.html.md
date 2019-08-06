@@ -280,7 +280,7 @@ Parameter | Description
 email | The email that register 
 
 
-## Refresh Token
+## Refresh Token [IDaaS]
 
 
 ```shell
