@@ -77,13 +77,13 @@ $.ajax({
 ```json
 
 {
-    "auth_token": "...",
-    "refresh_token": "...",
+    "access_token": "...",
     "username": "",
     "fullname": "",
     "email": "",
     "roles": [],
     "permissions": []
+    //other user info
 }
 
 ```
@@ -183,7 +183,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" ht
             },
     dataType: "json",
     type : "POST",
-    data: { email:"myemail@mail.com", password:"password"}
+    data: { "userType":"email",username:"myemail@mail.com", password:"password"}
     success : function(r) {
       console.log(r);
     }
@@ -194,13 +194,13 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" ht
 
 ```json
 {
-    "auth_token": "...",
-    "refresh_token": "...",
+    "access_token": "...",
     "username": "",
     "fullname": "",
     "email": "",
     "roles": [],
     "permissions": []
+    //other user info
 }
 
 
@@ -231,7 +231,7 @@ customer_token | The token is specific for customer
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/recover -d '{"email": "myemail@mail.com"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/recover -d '{"userType":"[email|mobile]","username": "myemail@mail.com"}'
 
 
 ```
@@ -241,12 +241,12 @@ $.ajax({
     url: "https://api.apieco.ir/manam/auth/recover",
     headers: {
                 "apieco_key":"<apieco_key>"
-                'auth_token':"..."
+            
               
             },
     dataType: "json",
     type : "POST",
-    data: { email:"myemail@mail.com"}
+    data: { "userType":"email",username:"myemail@mail.com"}
     success : function(r) {
       console.log(r);
     }
@@ -285,7 +285,7 @@ email | The email that register
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "auth_token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s" -H "refresh_token:fdb8fdbecf1d03ce5e6125c067733c0d51de209c" https://api.apieco.ir/manam/auth/refreshToken 
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "auth_token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s" -H "access_token:fdb8fdbecf1d03ce5e6125c067733c0d51de209c" https://api.apieco.ir/manam/auth/refreshToken 
 
 
 ```
@@ -296,7 +296,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H
 {
     "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s",
     "expires_in":20,
-    "refresh_token":"7fd15938c823cf58e78019bea2af142f9449696a"
+    "access_token":"7fd15938c823cf58e78019bea2af142f9449696a"
 }
 ```
 
@@ -545,5 +545,54 @@ email | [string] *
 
 ## Login with Manam [Manam]
 
+
+```shell
+
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/manamlogin
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+
+{
+        "email":"...",
+        "meli_code":"...",
+        "picture":"...",
+        "address":"...",
+        "postal_code":"...",
+        "birthday":"...",
+        "marital_status":"...",
+        "facebook_id":"...",
+        "instagram_id":"...",
+        "twitter_id":"...",
+        "linkedIn_id":"...",
+        "document":"...",
+        "mobile":"...",
+        "telephone":"..."
+   
+}
+
+```
+or for google users
+```json
+{
+        "ageRanges":"",
+				"CoverPhotos":""
+				"Photos":"",
+				"Locales":"",
+	      //name
+				"DisplayName":"",
+				"FamilyName":"",
+				"GivenName":"",
+				"DisplayNameLastFirst":"",
+				//birthday
+				"BirthdayDay":"",
+				"BirthdayMonth":"",
+				"BirthdayYear":"",
+				"Email":"",
+   
+}
 
 
