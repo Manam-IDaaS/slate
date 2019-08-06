@@ -31,7 +31,7 @@ Manam is IDaaS (Identity as a service).
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/register -d '{"userType":"[email|mobile]","name": "myyname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","meli_code":"12907652", "picture":"butypic","address":"Tehran, saadat Abad", "postal_code":"postal_code","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document","mobile":"09111087815","telephone":"88828919"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/register -d '{"userType":"[email|mobile]","confirm_url":"https://test.com/confirm","name": "myyname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","meli_code":"12907652", "picture":"butypic","address":"Tehran, saadat Abad", "postal_code":"postal_code","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document","mobile":"09111087815","telephone":"88828919"}'
 
 ```
 
@@ -46,7 +46,9 @@ $.ajax({
     type : "POST",
     data: {
     userType:"[email|mobile]",
+    confirm_url: "https://test.com/confirm",
     name:"myname",
+    username:"myemail@mail.com",
     email:"myemail@mail.com",
     password:"password",
     confirm_password:"password", 
