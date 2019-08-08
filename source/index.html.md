@@ -454,7 +454,7 @@ Contact to admin for give customer-token
 
 ```json
 {
-    "auth_token": "...",
+    "access_token": "...",
     "username": "",
     "fullname": "",
     "email": "",
