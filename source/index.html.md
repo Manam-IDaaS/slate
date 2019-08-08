@@ -100,26 +100,25 @@ None.
 
 ### Data Params
 
-Parameter | Type 
---------- | ------- 
-name | string
-email |[string],// obliging when userType is "email"
-mobile|[number], // obliging when userType is "mobile"
-tenant_email| [string] * // obliging when userType is "email"
-password | [string]*
-confirm_password | string*
-meli_code | string
-picture | string
-address | string
-birthday | date
-marital_status | string
-facebook_id | string
-instagram_id | string
-twitter_id | string
-linkedIn_id | string
-document | string
-mobile | string
-telephone | string
+Parameter | Type    | Description
+--------- | -------  ---------------
+name | string |
+email+ |[string] |// obliging when userType is "email"
+mobile+|[number] |// obliging when userType is "mobile"
+tenant_email+| [string] | // obliging when userType is "email"
+password* | [string] |
+confirm_password* | string |
+meli_code | string |
+picture | string |
+address | string |
+birthday | date |
+marital_status | string |
+facebook_id | string |
+instagram_id | string |
+twitter_id | string |
+linkedIn_id | string |
+document | string |
+telephone | string |
 
 
 ## Confirm  [IDaaS]
