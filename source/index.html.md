@@ -47,9 +47,10 @@ $.ajax({
     data: {
     userType:"[email|mobile]",
     confirm_url: "https://test.com/confirm",
+    tenant_email: "info@tenant.com" // obliging when userType is "email"
     name:"myname",
-    username:"myemail@mail.com",
-    email:"myemail@mail.com",
+    email:"myemail@mail.com",// obliging when userType is "email"
+    mobile:"09111087815", // obliging when userType is "mobile"
     password:"password",
     confirm_password:"password", 
     "meli_code":"12907652", 
@@ -62,8 +63,7 @@ $.ajax({
     "instagram_id":"instagram_id",
     "twitter_id":"twitter_id",
     "linkedIn_id":"linkedIn_id",
-    "document":"document",
-    "mobile":"09111087815",
+    "document":"document",    
     "telephone":"88828919"
      }
     success : function(r) {
@@ -103,7 +103,9 @@ None.
 Parameter | Type 
 --------- | ------- 
 name | string
-email | [string] *
+email |[string],// obliging when userType is "email"
+mobile|[number], // obliging when userType is "mobile"
+tenant_email| [string] * // obliging when userType is "email"
 password | [string]*
 confirm_password | string*
 meli_code | string
