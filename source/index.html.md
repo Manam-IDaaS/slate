@@ -46,7 +46,7 @@ $.ajax({
     type : "POST",
     data: {
     userType:"[email|mobile]",
-    confirm_url: "https://tenent.com/confirm",
+    confirm_url: "https://tenant.com/confirm",
     tenant_email: "info@tenant.com" // obliging when userType is "email"
     firstname:"firstname",
     lastname:"lastname"
