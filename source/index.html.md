@@ -145,11 +145,21 @@ $.ajax({
 
 > The above command returns JSON structured like this:
 
+if status code is 200:
 ```json
 {
 "location": "/",
 "message": "You have successfully confirmed your account.",
 "status": "success"
+}
+```
+if status code is 401:
+
+```json
+{
+"location": "/",
+"message": "Your confirmation is unsuccess",
+"status": "unsuccess"
 }
 ```
 
@@ -214,6 +224,147 @@ This endpoint confirm users on Manam.
 Parameter | Description
 --------- | -----------
 cnf | The string that confirm registartion
+
+
+
+## New Confirm Email  [IDaaS]
+
+```shell
+
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/new_confirm_email -d {userTpe:"email","email":"user@test.com","tenant_email":"info@tenant.com",confirm_url:"tenant.com/confirm"}
+```
+
+```javascript
+  
+  //user type email
+$.ajax({
+    url: "  https://api.apieco.ir/manam/auth/confirm_sms
+    headers: {
+                "apieco_key":"<apieco_key>"
+            },
+    dataType: "json",
+    type : "POST",
+    data:{userTpe:"email","email":"user@test.com","tenant_email":"info@tenan.com",confirm_url:"tenant.com/confirm"}
+    success : function(r) {
+      console.log(r);
+    }
+  });
+
+  
+  
+```
+
+> The above command returns JSON structured like this:
+
+if status code is 200:
+```json
+{
+"location": "/",
+"message": "You have successfully confirmed your account.",
+"status": "success"
+}
+```
+if status code is 401:
+```json
+{
+"location": "/",
+"message": "Your confirmation is unsuccess.",
+"status": "unsuccess"
+}
+```
+
+This endpoint send new confirmation for mobile users on Manam.
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+### HTTP Request
+
+`GET https://api.apieco.ir/manam/auth/new_confirm_sms/<cnf>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+userTpe*| string
+mobile* | string
+confirm_url*| string
+
+
+
+## New Confirm SMS  [IDaaS]
+
+```shell
+
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/new_confirm_sms -d {userTpe:"mobile","mobile":"09171929716",confirm_url:"tenant.com/confirm"}
+```
+
+```javascript
+//user type mobile
+$.ajax({
+    url: "  https://api.apieco.ir/manam/auth/confirm_sms
+    headers: {
+                "apieco_key":"<apieco_key>"
+            },
+    dataType: "json",
+    type : "POST",
+    data:{userTpe:"mobile","mobile":"09171929716",confirm_url:"tenant.com/confirm"}
+    success : function(r) {
+      console.log(r);
+    }
+  });
+  
+  //user type mobile
+$.ajax({
+    url: "  https://api.apieco.ir/manam/auth/confirm_sms
+    headers: {
+                "apieco_key":"<apieco_key>"
+            },
+    dataType: "json",
+    type : "POST",
+    data:{userTpe:"email","email":"user@test.com","tenant_email":"info@tenan.com",confirm_url:"tenant.com/confirm"}
+    success : function(r) {
+      console.log(r);
+    }
+  });
+
+  
+  
+```
+
+> The above command returns JSON structured like this:
+
+if status code is 200:
+```json
+{
+"location": "/",
+"message": "You have successfully confirmed your account.",
+"status": "success"
+}
+```
+if status code is 401:
+```json
+{
+"location": "/",
+"message": "Your confirmation is unsuccess.",
+"status": "unsuccess"
+}
+```
+
+This endpoint send new confirmation for mobile users on Manam.
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+### HTTP Request
+
+`GET https://api.apieco.ir/manam/auth/new_confirm_sms/<cnf>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+userTpe*| string
+mobile* | string
+confirm_url*| string
 
 
 ## Login [IDaaS]
