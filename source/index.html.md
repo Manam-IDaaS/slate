@@ -48,7 +48,8 @@ $.ajax({
     userType:"[email|mobile]",
     confirm_url: "https://test.com/confirm",
     tenant_email: "info@tenant.com" // obliging when userType is "email"
-    name:"myname",
+    firstname:"firstname",
+    lastname:"lastname"
     email:"myemail@mail.com",// obliging when userType is "email"
     mobile:"09111087815", // obliging when userType is "mobile"
     password:"password",
