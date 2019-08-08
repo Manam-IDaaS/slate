@@ -121,16 +121,16 @@ document | string |
 telephone | string |
 
 
-## Confirm  [IDaaS]
+## Confirm Email  [IDaaS]
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/confirm -d {cnf:"h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==","url":"[url]"}
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/confirm_email -d {cnf:"h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw=="}
 ```
 
 ```javascript
 $.ajax({
-    url: "  https://api.apieco.ir/manam/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
+    url: "  https://api.apieco.ir/manam/auth/confirm_email?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
     headers: {
                 "apieco_key":"<apieco_key>"
             },
@@ -158,13 +158,62 @@ This endpoint confirm users on Manam.
 
 ### HTTP Request
 
-`GET https://api.apieco.ir/manam/auth/confirm/<cnf>`
+`GET https://api.apieco.ir/manam/auth/confirm_email/<cnf>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
 cnf | The string that confirm registartion
+
+
+
+## Confirm SMS  [IDaaS]
+
+```shell
+
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/confirm_sms -d {cnf:"1237hsak"}
+```
+
+```javascript
+$.ajax({
+    url: "  https://api.apieco.ir/manam/auth/confirm_sms
+    headers: {
+                "apieco_key":"<apieco_key>"
+            },
+    dataType: "json",
+    type : "POST",
+    data:{cnf:"1237hsak"}
+    success : function(r) {
+      console.log(r);
+    }
+  });
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+"location": "/",
+"message": "You have successfully confirmed your account.",
+"status": "success"
+}
+```
+
+This endpoint confirm users on Manam.
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+### HTTP Request
+
+`GET https://api.apieco.ir/manam/auth/confirm_email/<cnf>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+cnf | The string that confirm registartion
+
 
 ## Login [IDaaS]
 
