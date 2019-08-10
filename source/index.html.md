@@ -227,18 +227,18 @@ cnf | The string that confirm registartion
 
 
 
-## New Confirm Email  [IDaaS]
+## Send Confirm Email  [IDaaS]
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/new_confirm_email -d {userTpe:"email","email":"user@test.com","tenant_email":"info@tenant.com",confirm_url:"tenant.com/confirm"}
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/send_confirm_email -d {userTpe:"email","email":"user@test.com","tenant_email":"info@tenant.com",confirm_url:"tenant.com/confirm"}
 ```
 
 ```javascript
   
   //user type email
 $.ajax({
-    url: "  https://api.apieco.ir/manam/auth/confirm_sms
+    url: "  https://api.apieco.ir/manam/auth/send_confirm_sms
     headers: {
                 "apieco_key":"<apieco_key>"
             },
@@ -291,17 +291,17 @@ confirm_url*| string
 
 
 
-## New Confirm SMS  [IDaaS]
+## Send Confirm SMS  [IDaaS]
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/new_confirm_sms -d {userTpe:"mobile","mobile":"09171929716",confirm_url:"tenant.com/confirm"}
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/send_confirm_sms -d {userTpe:"mobile","mobile":"09171929716",confirm_url:"tenant.com/confirm"}
 ```
 
 ```javascript
 //user type mobile
 $.ajax({
-    url: "  https://api.apieco.ir/manam/auth/confirm_sms
+    url: "  https://api.apieco.ir/manam/auth/send_confirm_sms
     headers: {
                 "apieco_key":"<apieco_key>"
             },
@@ -311,23 +311,7 @@ $.ajax({
     success : function(r) {
       console.log(r);
     }
-  });
-  
-  //user type mobile
-$.ajax({
-    url: "  https://api.apieco.ir/manam/auth/confirm_sms
-    headers: {
-                "apieco_key":"<apieco_key>"
-            },
-    dataType: "json",
-    type : "POST",
-    data:{userTpe:"email","email":"user@test.com","tenant_email":"info@tenan.com",confirm_url:"tenant.com/confirm"}
-    success : function(r) {
-      console.log(r);
-    }
-  });
-
-  
+  }); 
   
 ```
 
