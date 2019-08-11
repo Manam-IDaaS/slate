@@ -45,16 +45,18 @@ $.ajax({
     dataType: "json",
     type : "POST",
     data: {
-    userType:"[email|mobile]",
-    confirm_url: "https://tenant.com/confirm",
+    type:"[email|mobile]",
+    tenant_confirm_url: "https://tenant.com/confirm",
     tenant_email: "info@tenant.com" // obliging when userType is "email"
     firstname:"firstname",
     lastname:"lastname"
     email:"myemail@mail.com",// obliging when userType is "email"
     mobile:"09111087815", // obliging when userType is "mobile"
+    "mobile_seed":"+98"
     password:"password",
     confirm_password:"password", 
-    "meli_code":"12907652", 
+    "national_code":"12907652", 
+    "role":"admin", 
     "picture":"butypic",
     "address":"Tehran, saadat Abad",
     "postal_code":"postal_code",
@@ -79,12 +81,19 @@ $.ajax({
 
 {
     "access_token": "...",
-    "username": "",
-    "fullname": "",
     "email": "",
     "roles": [],
-    "permissions": []
-    //other user info
+    "permissions": [],
+    tenant_confirm_url:"" 
+    tenant_email: "info@tenant.com" // obliging when type is "email"
+    firstname:"firstname",
+    lastname:"lastname",
+    email:"myemail@mail.com",// obliging when type is "email"
+    mobile:"09111087815", // obliging when type is "mobile"
+    "mobile_seed":"+98"
+    "national_code":"12907652", 
+    "birthday":"1990-04-05",
+    customefields:{"phone":"887219031":"address":"Tehran"}
 }
 
 ```
@@ -103,15 +112,16 @@ None.
 
 Parameter | Type    | Description
 --------- | ------- | ---------------
-name | string |
-email+ |[string] |// obliging when userType is "email"
-mobile+|[number] |// obliging when userType is "mobile"
-tenant_email+| [string] | // obliging when userType is "email"
+type* | string | email or mobile
+email+ |[string] |// required when type is "email"
+mobile+|[number] |// required when type is "mobile"
+mobile_seed+|[number] |// required when type is "mobile"
+tenant_email+| [string] | // required when type is "email"
+tenant_confirm_url* | string
 password* | [string] |
 confirm_password* | string |
-meli_code | string |
-picture | string |
-address | string |
+firstname| string |
+lastname | string |
 birthday | date |
 marital_status | string |
 facebook_id | string |
