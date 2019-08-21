@@ -31,7 +31,7 @@ Manam is IDaaS (Identity as a service).
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "Accept-Language":"en-ca,en;q=0.8,en-us;" https://api.apieco.ir/manam/auth/register -d '{"userType":"[email|mobile]","confirm_url":"https://tenant.com/confirm","firstname": "myyfirstname","lastname":"mylastname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","national_code":"12907652",birthday:"1370-01-03"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "Accept-Language":"en-ca,en;q=0.8,en-us;" https://api.apieco.ir/manam/auth/register -d '{"type":"[email|mobile]","confirm_url":"https://tenant.com/confirm","firstname": "myyfirstname","lastname":"mylastname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","national_code":"12907652",birthday:"1370-01-03"}'
 
 ```
 
@@ -59,7 +59,7 @@ $.ajax({
     "national_code":"12907652", 
     "bithday":"1370-01-03",
     "role":"admin"
-    "customefields":[{"phone":"887219031":"address":"Tehran"}]
+    "custome_fields":[{"phone":"887219031":"address":"Tehran"}]
      }
     success : function(r) {
       console.log(r);
