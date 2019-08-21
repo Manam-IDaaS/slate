@@ -31,7 +31,7 @@ Manam is IDaaS (Identity as a service).
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/register -d '{"userType":"[email|mobile]","confirm_url":"https://tenant.com/confirm","name": "myyname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","meli_code":"12907652", "picture":"butypic","address":"Tehran, saadat Abad", "postal_code":"postal_code","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document","mobile":"09111087815","telephone":"88828919"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "Accept-Language":"en-ca,en;q=0.8,en-us;" https://api.apieco.ir/manam/auth/register -d '{"userType":"[email|mobile]","confirm_url":"https://tenant.com/confirm","firstname": "myyfirstname","lastname":"mylastname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","national_code":"12907652",birthday:"1370-01-03"}'
 
 ```
 
@@ -40,6 +40,7 @@ $.ajax({
     url: "https://api.apieco.ir/manam/auth/register",
     headers: {
                 'apieco_key': '<apieco_key>',
+                "Accept-Language":"en-ca,en;q=0.8,en-us;"
          
             },
     dataType: "json",
@@ -56,18 +57,9 @@ $.ajax({
     password:"password",
     confirm_password:"password", 
     "national_code":"12907652", 
-    "role":"admin", 
-    "picture":"butypic",
-    "address":"Tehran, saadat Abad",
-    "postal_code":"postal_code",
-    "birthday":"1990-02-1",
-    "marital_status":"single",
-    "facebook_id":"facebook_id"
-    "instagram_id":"instagram_id",
-    "twitter_id":"twitter_id",
-    "linkedIn_id":"linkedIn_id",
-    "document":"document",    
-    "telephone":"88828919"
+    "bithday":"1370-01-03",
+    "role":"admin"
+    customefields:[{"phone":"887219031":"address":"Tehran"}]
      }
     success : function(r) {
       console.log(r);
@@ -83,7 +75,6 @@ $.ajax({
     "access_token": "...",
     "email": "",
     "roles": [],
-    "permissions": [],
     tenant_confirm_url:"" 
     tenant_email: "info@tenant.com" // obliging when type is "email"
     firstname:"firstname",
@@ -93,7 +84,9 @@ $.ajax({
     "mobile_seed":"+98"
     "national_code":"12907652", 
     "birthday":"1990-04-05",
-    customefields:{"phone":"887219031":"address":"Tehran"}
+    custome_fields:[{"phone":"887219031":"address":"Tehran"}]
+    "oauth2_provider":"",
+    "oauth2_user_info":[]
 }
 
 ```
@@ -117,33 +110,30 @@ email+ |[string] |// required when type is "email"
 mobile+|[number] |// required when type is "mobile"
 mobile_seed+|[number] |// required when type is "mobile"
 tenant_email+| [string] | // required when type is "email"
-tenant_confirm_url* | string
-password* | [string] |
+tenant_confirm_url* | string // required when type is "email"
+password* | [string] | 
 confirm_password* | string |
 firstname| string |
 lastname | string |
 birthday | date |
-marital_status | string |
-facebook_id | string |
-instagram_id | string |
-twitter_id | string |
-linkedIn_id | string |
-document | string |
-telephone | string |
+custome_fields | string |
+oauth2_provider | string | //example : google , facebook, github , ...
+oauth2_user_info | string |
 
 
 ## Confirm Email  [IDaaS]
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/confirm_email -d {cnf:"h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw=="}
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" , -H "Accept-Language":"en-ca,en;q=0.8,en-us;" https://api.apieco.ir/manam/auth/confirm_email -d {cnf:"h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw=="}
 ```
 
 ```javascript
 $.ajax({
     url: "  https://api.apieco.ir/manam/auth/confirm_email?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
     headers: {
-                "apieco_key":"<apieco_key>"
+                "apieco_key":"<apieco_key>",
+                "Accept-Language":"en-ca,en;q=0.8,en-us;"
             },
     dataType: "json",
     type : "GET",
