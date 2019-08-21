@@ -425,7 +425,7 @@ password | The password to login
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/recover -d '{"userType":"[email|mobile]","username": "myemail@mail.com"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/recover -d '{"type":"[email|mobile]","email": "myemail@mail.com"}'
 
 
 ```
@@ -434,13 +434,14 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" ht
 $.ajax({
     url: "https://api.apieco.ir/manam/auth/recover",
     headers: {
-                "apieco_key":"<apieco_key>"
+                "apieco_key":"<apieco_key>",
+                
             
               
             },
     dataType: "json",
     type : "POST",
-    data: { "userType":"email",username:"myemail@mail.com"}
+    data: { "type":"email","email":"myemail@mail.com"}
     success : function(r) {
       console.log(r);
     }
@@ -449,6 +450,7 @@ $.ajax({
 
 > The above command returns JSON structured like this:
 
+if status code is 200:
 ```json
 {
 "location": "/",
@@ -456,6 +458,15 @@ $.ajax({
 "status": "success"
 }
 ```
+if status code is 401:
+```json
+{
+"location": "/",
+"message": "There is an error here to recover password.",
+"status": "unsuccess"
+}
+```
+
 
 This endpoint recover user on Manam.
 
@@ -471,7 +482,77 @@ None.
 
 Parameter | Description
 --------- | -----------
+type | email or mobile
 email | The email that register 
+
+
+
+## Change Password [IDaaS]
+
+```shell
+
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/changepassword -d '{"cnf":"....","new_password": "...","re_new_password":"..."}'
+
+
+```
+
+```javascript
+$.ajax({
+    url: "https://api.apieco.ir/manam/auth/recover",
+    headers: {
+                "apieco_key":"<apieco_key>",
+                
+            
+              
+            },
+    dataType: "json",
+    type : "GET",
+    data: { "cnf":"...","new_password":"...","re_new_password":""}
+    success : function(r) {
+      console.log(r);
+    }
+  });
+  ```
+
+> The above command returns JSON structured like this:
+
+if status code is 200:
+```json
+{
+"location": "/",
+"message": "Your password chaneg successfully",
+"status": "success"
+}
+```
+if status code is 401:
+```json
+{
+"location": "/",
+"message": "There is an error here to change password.",
+"status": "unsuccess"
+}
+```
+
+
+This endpoint recover user on Manam.
+
+### HTTP Request
+
+`POST https://api.apieco.ir/manam/auth/recover`
+
+### URL Parameters
+
+None.
+
+### Data Parameters
+
+Parameter | Description
+--------- | -----------
+type | email or mobile
+email | The email that register 
+
+
+
 
 
 ## Refresh Token [IDaaS]
