@@ -46,20 +46,20 @@ $.ajax({
     dataType: "json",
     type : "POST",
     data: {
-    type:"[email|mobile]",
-    tenant_confirm_url: "https://tenant.com/confirm",
-    tenant_email: "info@tenant.com" // obliging when userType is "email"
-    firstname:"firstname",
-    lastname:"lastname"
-    email:"myemail@mail.com",// obliging when userType is "email"
-    mobile:"09111087815", // obliging when userType is "mobile"
+    "type":"[email|mobile]",
+    "tenant_confirm_url": "https://tenant.com/confirm",
+    "tenant_email": "info@tenant.com" // obliging when userType is "email"
+    "firstname":"firstname",
+    "lastname":"lastname"
+    "email":"myemail@mail.com",// obliging when userType is "email"
+    "mobile":"09111087815", // obliging when userType is "mobile"
     "mobile_seed":"+98"
-    password:"password",
-    confirm_password:"password", 
+    "password":"password",
+    "confirm_password":"password", 
     "national_code":"12907652", 
     "bithday":"1370-01-03",
     "role":"admin"
-    customefields:[{"phone":"887219031":"address":"Tehran"}]
+    "customefields":[{"phone":"887219031":"address":"Tehran"}]
      }
     success : function(r) {
       console.log(r);
@@ -72,19 +72,18 @@ $.ajax({
 ```json
 
 {
-    "access_token": "...",
-    "email": "",
-    "roles": [],
-    tenant_confirm_url:"" 
-    tenant_email: "info@tenant.com" // obliging when type is "email"
-    firstname:"firstname",
-    lastname:"lastname",
-    email:"myemail@mail.com",// obliging when type is "email"
-    mobile:"09111087815", // obliging when type is "mobile"
-    "mobile_seed":"+98"
+    "access_token": "...",    
+    "email":"myemail@mail.com",// required when type is "email"
+    "tenant_email": "info@tenant.com" // required when type is "email"
+    "tenant_confirm_url":"tenant.com/tenant" //required
+    "mobile":"09111087815", // required when type is "mobile"
+    "mobile_seed":"+98",        
+    "firstname":"firstname",
+    "lastname":"lastname",    
     "national_code":"12907652", 
     "birthday":"1990-04-05",
-    custome_fields:[{"phone":"887219031":"address":"Tehran"}]
+    "roles": [],
+    "custome_fields":[{"phone":"887219031":"address":"Tehran"}]
     "oauth2_provider":"",
     "oauth2_user_info":[]
 }
@@ -106,18 +105,18 @@ None.
 Parameter | Type    | Description
 --------- | ------- | ---------------
 type* | string | email or mobile
-email+ |[string] |// required when type is "email"
-mobile+|[number] |// required when type is "mobile"
-mobile_seed+|[number] |// required when type is "mobile"
-tenant_email+| [string] | // required when type is "email"
-tenant_confirm_url* | string // required when type is "email"
+email+ |[string] | required when type is "email"
+mobile+|[number] | required when type is "mobile"
+mobile_seed+|[number] | required when type is "mobile"
+tenant_email+| [string] |  required when type is "email"
+tenant_confirm_url* | string | 
 password* | [string] | 
 confirm_password* | string |
 firstname| string |
 lastname | string |
 birthday | date |
 custome_fields | string |
-oauth2_provider | string | //example : google , facebook, github , ...
+oauth2_provider | string | example : google , facebook, github , ...
 oauth2_user_info | string |
 
 
@@ -238,13 +237,13 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" ht
   
   //user type email
 $.ajax({
-    url: "  https://api.apieco.ir/manam/auth/send_confirm_sms
+    url: "  https://api.apieco.ir/manam/auth/send_confirm_email
     headers: {
                 "apieco_key":"<apieco_key>"
             },
     dataType: "json",
     type : "POST",
-    data:{userTpe:"email","email":"user@test.com","tenant_email":"info@tenan.com",confirm_url:"tenant.com/confirm"}
+    data:{"email":"user@test.com","tenant_email":"info@tenan.com",tenant_confirm_url:"tenant.com/confirm"}
     success : function(r) {
       console.log(r);
     }
@@ -285,7 +284,6 @@ This endpoint send new confirmation for mobile users on Manam.
 
 Parameter | Description
 --------- | -----------
-userTpe*| string
 mobile* | string
 confirm_url*| string
 
@@ -295,7 +293,7 @@ confirm_url*| string
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/send_confirm_sms -d {userTpe:"mobile","mobile":"09171929716",confirm_url:"tenant.com/confirm"}
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/send_confirm_sms -d {"mobile":"09171929716",confirm_url:"tenant.com/confirm"}
 ```
 
 ```javascript
@@ -303,11 +301,12 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" ht
 $.ajax({
     url: "  https://api.apieco.ir/manam/auth/send_confirm_sms
     headers: {
-                "apieco_key":"<apieco_key>"
+                "apieco_key":"<apieco_key>",
+                "Accept-Language":"en-ca,en;q=0.8,en-us;"
             },
     dataType: "json",
     type : "POST",
-    data:{userTpe:"mobile","mobile":"09171929716",confirm_url:"tenant.com/confirm"}
+    data:{"mobile":"09171929716",confirm_url:"tenant.com/confirm"}
     success : function(r) {
       console.log(r);
     }
@@ -346,7 +345,6 @@ This endpoint send new confirmation for mobile users on Manam.
 
 Parameter | Description
 --------- | -----------
-userTpe*| string
 mobile* | string
 confirm_url*| string
 
@@ -357,7 +355,7 @@ confirm_url*| string
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/login -d '{"userType":"[email|mobile]","username": "myemail@mail.com","password":"password"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/login -d '{"type":"[email|mobile]","email": "myemail@mail.com","password":"password"}'
 
 ```
 
@@ -365,11 +363,12 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" ht
  $.ajax({
     url: "https://api.apieco.ir/manam/auth/login",
     headers: {                
-                "apieco_key":"<apieco_key>"
+                "apieco_key":"<apieco_key>",
+                "Accept-Language":"en-ca,en;q=0.8,en-us;"
             },
     dataType: "json",
     type : "POST",
-    data: { "userType":"email",username:"myemail@mail.com", password:"password"}
+    data: { "type":"email",email:"myemail@mail.com", password:"password"}
     success : function(r) {
       console.log(r);
     }
@@ -380,13 +379,21 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" ht
 
 ```json
 {
-    "access_token": "...",
-    "username": "",
-    "fullname": "",
-    "email": "",
+    
+    "access_token": "...",    
+    "email":"myemail@mail.com",// required when type is "email"
+    "tenant_email": "info@tenant.com" // required when type is "email"
+    "tenant_confirm_url":"tenant.com/tenant" //required
+    "mobile":"09111087815", // required when type is "mobile"
+    "mobile_seed":"+98",        
+    "firstname":"firstname",
+    "lastname":"lastname",    
+    "national_code":"12907652", 
+    "birthday":"1990-04-05",
     "roles": [],
-    "permissions": []
-    //other user info
+    "custome_fields":[{"phone":"887219031":"address":"Tehran"}]
+    "oauth2_provider":"",
+    "oauth2_user_info":[]
 }
 
 
@@ -407,9 +414,10 @@ None.
 
 Parameter | Description
 --------- | -----------
+type | email or mobile
 email | The email that register 
 password | The password to login
-customer_token | The token is specific for customer
+
 
 
 
