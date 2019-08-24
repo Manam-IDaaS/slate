@@ -82,7 +82,7 @@ $.ajax({
     "lastname":"lastname",    
     "national_code":"12907652", 
     "birthday":"1990-04-05",
-    "roles": [],
+    "role": "",
     "custome_fields":[{"phone":"887219031":"address":"Tehran"}]
     "oauth2_provider":"",
     "oauth2_user_info":[]
