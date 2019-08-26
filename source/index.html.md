@@ -498,7 +498,7 @@ curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" htt
 
 ```javascript
 $.ajax({
-    url: "https://api.apieco.ir/manam/auth/recover",
+    url: "https://api.apieco.ir/manam/auth/changepassword",
     headers: {
                 "apieco_key":"<apieco_key>",
                 
