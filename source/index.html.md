@@ -452,10 +452,9 @@ $.ajax({
 
 if status code is 200:
 ```json
-{
-"location": "/",
-"message": "An email has been sent to you with further instructions on how to reset your password.",
-"status": "success"
+{"location":"/",
+"message":"An email has been sent to you with further instructions on how to reset your password.",
+"status":"success"
 }
 ```
 if status code is 401:
@@ -491,7 +490,7 @@ email | The email that register
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/changepassword -d '{"cnf":"....","new_password": "...","re_new_password":"..."}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/recover/end -d '{"token":"...","password":"...","confirm_password":"..."}'
 
 
 ```
@@ -507,7 +506,7 @@ $.ajax({
             },
     dataType: "json",
     type : "GET",
-    data: { "cnf":"...","new_password":"...","re_new_password":""}
+    data: { token":"...","password":"...","confirm_password":"..."}
     success : function(r) {
       console.log(r);
     }
@@ -526,11 +525,9 @@ if status code is 200:
 ```
 if status code is 401:
 ```json
-{
-"location": "/",
-"message": "There is an error here to change password.",
-"status": "unsuccess"
-}
+{"csrf_token":"H0tNRAn1wDgtHOJKuoNOSwDtLAE2XgUiizt4aLukbRNuh8cnXbDr9HA9nB9kzpIRAcyRGsaroMCGw5L/jc6Icw==",
+"current_user_name":"",
+"errors":{"":["recovery token is invalid"]},"flash_error":"","flash_success":"","loggedin":false,"modules":{"auth":true,"auth-custom":true,"confirm":true,"confirm-custom":true,"lock":true,"logout":true,"oauth2":true,"recover":true,"recover-custom":true,"register":true,"register-custom":true,"remember":true},"status":"failure"}
 ```
 
 
