@@ -854,7 +854,7 @@ Vary: Cookie
 User can remove 2fa.
 Tips:
 1. set cookie from Login step
-2.code and recovery_code params are described in previous part (code comes from sms and recovery_code comes from confirm step).
+2.code and recovery_code params are described in previous part (code comes from QR code scanner that change every minutes and recovery_code comes from confirm step).
 
 
 ```shell
