@@ -541,9 +541,229 @@ Vary: Cookie
 
 ```
 
+### step 4: Set up with Get
+
+This step and the next step are the background for preparation and display QR code. (use cookie from previous step )
+
+```shell
+http -p BHbh GET  localhost:3000/auth/2fa/totp/setup Cookie:"ab_blog=MTU2OTIzNTYxOHxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fMwDt2Jx4Bgb9hMDwaaukcbwaJ0l83nwIpeko8z9FD3s;"
+```
+
+> The above return this output.
+
+```shell
+GET /auth/2fa/totp/setup HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Cookie: ab_blog=MTU2OTIzNTYxOHxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fMwDt2Jx4Bgb9hMDwaaukcbwaJ0l83nwIpeko8z9FD3s;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
 
 
 
+HTTP/1.1 200 OK
+Content-Length: 343
+Content-Type: application/json
+Date: Mon, 23 Sep 2019 10:48:16 GMT
+Set-Cookie: csrf_token=GddII5bFs+aXE8zrX4RQaF2VexgV/7tRqqqrt0X9sD4=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1; Path=/; Expires=Mon, 23 Sep 2019 22:48:16 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "csrf_token": "KCIeoVA3ZFmKIpdO4GmGebpFezo7njGYd3Hx22wWxKUx9VaCxvLXvx0xW6W/7dYR59AAIi5hisnd21psKet0mw==",
+    "current_user_name": "myyname",
+    "flash_error": "",
+    "flash_success": "",
+    "loggedin": true,
+    "modules": {
+        "auth": true,
+        "confirm": true,
+        "lock": true,
+        "logout": true,
+        "oauth2": true,
+        "otp": true,
+        "recover": true,
+        "register": true,
+        "remember": true
+    },
+    "status": "success"
+}
+
+```
+
+### step 5: Set up with POST
+
+This step and the previous step are the background for preparation and display QR code. (use cookie from previous step )
+
+```shell
+http -p BHbh POST  localhost:3000/auth/2fa/totp/setup Cookie:"ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1;"
+```
+
+> The above return this output.
+
+```shell
+POST /auth/2fa/totp/setup HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 0
+Cookie: ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+
+
+HTTP/1.1 302 Found
+Content-Length: 0
+Date: Mon, 23 Sep 2019 10:48:56 GMT
+Location: /auth/2fa/totp/confirm
+Set-Cookie: csrf_token=2u4T82qTkXUJyI04Gp/X0fQYLiKFVUqQelVI2g4JXOs=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==; Path=/; Expires=Mon, 23 Sep 2019 22:48:56 GMT; Max-Age=43200
+Vary: Cookie
+
+```
+
+### step 6: Set up with POST
+
+This step and the previous step are the background for preparation and display QR code. (use cookie from previous step )
+
+```shell
+http -p BHbh POST  localhost:3000/auth/2fa/totp/setup Cookie:"ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1;"
+```
+
+> The above return this output.
+
+```shell
+POST /auth/2fa/totp/setup HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 0
+Cookie: ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+
+
+HTTP/1.1 302 Found
+Content-Length: 0
+Date: Mon, 23 Sep 2019 10:48:56 GMT
+Location: /auth/2fa/totp/confirm
+Set-Cookie: csrf_token=2u4T82qTkXUJyI04Gp/X0fQYLiKFVUqQelVI2g4JXOs=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==; Path=/; Expires=Mon, 23 Sep 2019 22:48:56 GMT; Max-Age=43200
+Vary: Cookie
+
+
+```
+
+
+### step 7: Display QR code
+
+This step display QR code and user have to scan QR code and use code from that that change every minutues. (use cookie from previous step )
+
+```shell
+http -p BHbh GET  localhost:3000/auth/2fa/totp/qr Cookie:"ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==;"
+```
+
+> The above return this output.
+
+```shell
+GET /auth/2fa/totp/qr HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Cookie: ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+
+
+HTTP/1.1 200 OK
+Content-Length: 1390
+Content-Type: image/png
+Date: Mon, 23 Sep 2019 10:50:07 GMT
+Set-Cookie: csrf_token=b3GLiRKaeE6quSYoJtn9+qozPwQDGXUkdRR1eGNKs0k=; Max-Age=31536000
+Vary: Cookie
+
+
+
++-----------------------------------------+
+| NOTE: binary data not shown in terminal |
++-----------------------------------------+
+
+
+```
+
+Note : In shell can not show birnay data use browser or other tools like POSTMAN.
+
+
+### step 8: Confirm and get recovery Code
+
+This step use code from QR code that setup in mobile app or other ways from previous step and get recovery code. (use cookie from previous step )
+
+```shell
+http -p BHbh POST  localhost:3000/auth/2fa/totp/confirm code="396259" Cookie:"ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw=="
+```
+
+> The above return this output.
+
+```shell
+POST /auth/2fa/totp/confirm HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 18
+Content-Type: application/json
+Cookie: ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "code": "396259"
+}
+
+HTTP/1.1 200 OK
+Content-Length: 502
+Content-Type: application/json
+Date: Mon, 23 Sep 2019 10:52:53 GMT
+Set-Cookie: csrf_token=cOZlegLkkp2P3eBkoy1WPc43x6CjMk2tRO3JagRZxqU=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNTk3M3xEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fFaWSRTIhAEDaUUMCQWkvh_h7DzheUMIXythE_yEhrpV; Path=/; Expires=Mon, 23 Sep 2019 22:52:53 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "csrf_token": "PJAr2TFAiuCChIODd2C+P8CZLJm+Mjg1sBQRXUOY3GNMdk6jM6QYfQ1ZY+fUTegCDq7rOR0AdZj0+dg3R8Eaxg==",
+    "current_user_name": "myyname",
+    "flash_error": "",
+    "flash_success": "",
+    "loggedin": true,
+    "modules": {
+        "auth": true,
+        "confirm": true,
+        "lock": true,
+        "logout": true,
+        "oauth2": true,
+        "otp": true,
+        "recover": true,
+        "register": true,
+        "remember": true
+    },
+    "recovery_codes": [
+        "qh7eg-78iii",
+        "2i56t-26sma",
+        "ipnjp-hoa7r",
+        "ohkmj-uamj3",
+        "q51ut-tb9n5",
+        "jvacz-vd21u",
+        "5gf63-7x7dc",
+        "khb8f-6wucy",
+        "ue647-9vqqk",
+        "9k8mu-f62gs"
+    ],
+    "status": "success"
+}
+
+```
 
 
 
