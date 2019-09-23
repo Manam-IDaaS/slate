@@ -765,7 +765,150 @@ Vary: Cookie
 
 ```
 
+## Login two factor authentication via Time-Based One Time Passwords (totp) [IDaaS]
 
+You should use two factor authentication in your application if you want additional security beyond that of just simple passwords. Each 2fa module supports a different mechanism for verifying a second factor of authentication from a user.
+
+### step1 : Login via password
+```shell
+http -p BHbh POST localhost:3000/auth/login -H "apieco_key:<apieco_key>" email="test@test.com" password="1234"
+
+```
+
+> The above return this output for Login: (use this cookie for the next step)
+
+```shell
+POST /auth/login HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 46
+Content-Type: application/json
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "email": "test@test.com",
+    "password": "1234"
+}
+
+HTTP/1.1 307 Temporary Redirect
+Content-Length: 57
+Content-Type: application/json
+Date: Mon, 23 Sep 2019 10:53:13 GMT
+Set-Cookie: csrf_token=jmmT9/4pPYwSKslwmrV5t6SRZBlmM7hSWvh4hLs7csM=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNTk5M3xEdi1CQkFFQ180SUFBUkFCRUFBQU1fLUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXwG4MkM6K4ldMpRxUE8mSfBWRCt_pxcHTt8TTqamXaCSA==; Path=/; Expires=Mon, 23 Sep 2019 22:53:13 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "location": "/auth/2fa/totp/validate",
+    "status": "success"
+}
+
+```
+
+### step2: validate with code and verify code
+This command use to authenticate in 2fa visa toyp. (set cookie from previouse step)
+code and recovery_code params are described in previous part (code comes from sms and recovery_code comes from confirm step).
+
+```shell
+http -p BHbh POST  localhost:3000/auth/2fa/totp/validate code="622153" recovery_code="qh7eg-78iii" Cookie:"ab_blog=MTU2OTIzNTk5M3xEdi1CQkFFQ180SUFBUkFCRUFBQU1fLUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXwG4MkM6K4ldMpRxUE8mSfBWRCt_pxcHTt8TTqamXaCSA==;"
+```
+
+> The above return this output.
+
+```shell
+POST /auth/2fa/totp/validate HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 50
+Content-Type: application/json
+Cookie: ab_blog=MTU2OTIzNTk5M3xEdi1CQkFFQ180SUFBUkFCRUFBQU1fLUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXwG4MkM6K4ldMpRxUE8mSfBWRCt_pxcHTt8TTqamXaCSA==;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "code": "622153",
+    "recovery_code": "qh7eg-78iii"
+}
+
+HTTP/1.1 307 Temporary Redirect
+Content-Length: 74
+Content-Type: application/json
+Date: Mon, 23 Sep 2019 10:56:16 GMT
+Set-Cookie: csrf_token=8iFQbRUx6q8n8l4UrCyHtGZYakTNBfPd74PK1236/+g=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNjE3NnxEdi1CQkFFQ180SUFBUkFCRUFBQVRmLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ3dBSmRIZHZabUZqZEc5eUJuTjBjbWx1Wnd3R0FBUjBiM1J3fC2Q-SnGpsB5B-Spyo1tRtrhJokNfxxBpvPKdB_59zaJ; Path=/; Expires=Mon, 23 Sep 2019 22:56:16 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "location": "/",
+    "message": "Successfully Authenticated",
+    "status": "success"
+}
+```
+
+
+## Remove two factor authentication via totp (Disable) [IDaaS]
+
+User can remove 2fa.
+Tips:
+1. set cookie from Login step
+2.code and recovery_code params are described in previous part (code comes from sms and recovery_code comes from confirm step).
+
+
+```shell
+
+http -p BHbh POST localhost:3000/auth/2fa/totp/remove code="114381" recovery_code="2i56t-26sma" Cookie:"ab_blog=MTU2OTIzNjE3NnxEdi1CQkFFQ180SUFBUkFCRUFBQVRmLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ3dBSmRIZHZabUZqZEc5eUJuTjBjbWx1Wnd3R0FBUjBiM1J3fC2Q-SnGpsB5B-Spyo1tRtrhJokNfxxBpvPKdB_59zaJ;"
+```
+
+> The above return this output.
+
+```shell
+POST /auth/2fa/totp/remove HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 50
+Content-Type: application/json
+Cookie: ab_blog=MTU2OTIzNjE3NnxEdi1CQkFFQ180SUFBUkFCRUFBQVRmLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ3dBSmRIZHZabUZqZEc5eUJuTjBjbWx1Wnd3R0FBUjBiM1J3fC2Q-SnGpsB5B-Spyo1tRtrhJokNfxxBpvPKdB_59zaJ;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "code": "114381",
+    "recovery_code": "2i56t-26sma"
+}
+
+HTTP/1.1 200 OK
+Content-Length: 343
+Content-Type: application/json
+Date: Mon, 23 Sep 2019 10:58:57 GMT
+Set-Cookie: csrf_token=QuZTwCF8KTTdaVXEmUS21MVC6DfOzJvOfQsxO2Ev0pE=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNjMzN3xEdi1CQkFFQ180SUFBUkFCRUFBQUt2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXx7_OwN5f_ZuxcTnCXg033zd0_LbNUBoBDI6vrpjpRQ5w==; Path=/; Expires=Mon, 23 Sep 2019 22:58:57 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "csrf_token": "T2EapDfZeQ1wZxNjNcjJVJ2tgNsTajPDMbhzYnOSWHYNh0lkFqVQOa0ORqesjH+AWO9o7N2mqA1Ms0JZEr2K5w==",
+    "current_user_name": "myyname",
+    "flash_error": "",
+    "flash_success": "",
+    "loggedin": true,
+    "modules": {
+        "auth": true,
+        "confirm": true,
+        "lock": true,
+        "logout": true,
+        "oauth2": true,
+        "otp": true,
+        "recover": true,
+        "register": true,
+        "remember": true
+    },
+    "status": "success"
+}
+
+```
 
 
 
