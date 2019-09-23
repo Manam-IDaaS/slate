@@ -419,6 +419,137 @@ email | The email that register
 password | The password to login
 
 
+## Register two factor authentication via Time-Based One Time Passwords(totp) (Enable) [IDaaS]
+
+You should use two factor authentication in your application if you want additional security beyond that of just simple passwords. Each 2fa module supports a different mechanism for verifying a second factor of authentication from a user.
+
+Tip:
+* You have to be login to enable 2fa (two factor authentication)
+
+### step1 :Login:
+```shell
+http -p BHbh POST localhost:3000/auth/login -H "apieco_key:<apieco_key>" email="test@test.com" password="1234"
+
+```
+
+> The above return this output for Login: (use this cookie for the next step)
+```shell
+POST /auth/login HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 46
+Content-Type: application/json
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "email": "test@test.com",
+    "password": "1234"
+}
+
+HTTP/1.1 307 Temporary Redirect
+Content-Length: 35
+Content-Type: application/json
+Date: Mon, 23 Sep 2019 10:44:45 GMT
+Set-Cookie: csrf_token=2FL0EDK4UIN5lDaidm8GzoYvim0QCHoi4iF/ZdMF6S0=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNTQ4NXxEdi1CQkFFQ180SUFBUkFCRUFBQUt2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXw43TZdnSFlWDi8BNoOHAUmbk7WnKt-jnml5Vgmn5bpuA==; Path=/; Expires=Mon, 23 Sep 2019 22:44:45 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "location": "/",
+    "status": "success"
+}
+```
+
+### step 2: Verify Email
+This step use cookie from previous step and set code param with email.
+
+```shell
+http -p BHbh POST  localhost:3000/auth/2fa/totp/email/verify code="test@test.com" Cookie:"ab_blog=MTU2OTIzNTQ4NXxEdi1CQkFFQ180SUFBUkFCRUFBQUt2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXw43TZdnSFlWDi8BNoOHAUmbk7WnKt-jnml5Vgmn5bpuA==;"
+```
+> The above return this output and send verify link to email.
+
+```shell
+POST /auth/2fa/totp/email/verify HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 25
+Content-Type: application/json
+Cookie: ab_blog=MTU2OTIzNTQ4NXxEdi1CQkFFQ180SUFBUkFCRUFBQUt2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXw43TZdnSFlWDi8BNoOHAUmbk7WnKt-jnml5Vgmn5bpuA==;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "code": "test@test.com"
+}
+
+HTTP/1.1 307 Temporary Redirect
+Content-Length: 98
+Content-Type: application/json
+Date: Mon, 23 Sep 2019 10:45:39 GMT
+Set-Cookie: csrf_token=jiK/MlwuO87gfl8f5Wb6bAs14L4+Wn4BVsyXefFZswo=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNTUzOXxEdi1CQkFFQ180SUFBUkFCRUFBQWJQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRmdBVWRIZHZabUZqZEc5eVgyRjFkR2hmZEc5clpXNEdjM1J5YVc1bkRCb0FHRlY1WlZwSWVXRTJVVVU1YVdWeVRreFNORkpMVDNjOVBRPT18IKd27uBfVMg8-MnO6VVlUVVD3uky5cqg7j27N_oVerE=; Path=/; Expires=Mon, 23 Sep 2019 22:45:39 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "location": "/",
+    "message": "An e-mail has been sent to confirm 2FA activation.",
+    "status": "success"
+}
+
+```
+
+### step 3: Verify Email by Link
+
+This step verfy link that be send to email. (use cookie from previous step )
+
+```shell
+http -p BHbh GET  localhost:3000/auth/2fa/totp/email/verify/end token="UyeZHya6QE9ierNLR4RKOw=="  Cookie:"ab_blog=MTU2OTIzNTUzOXxEdi1CQkFFQ180SUFBUkFCRUFBQWJQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRmdBVWRIZHZabUZqZEc5eVgyRjFkR2hmZEc5clpXNEdjM1J5YVc1bkRCb0FHRlY1WlZwSWVXRTJVVVU1YVdWeVRreFNORkpMVDNjOVBRPT18IKd27uBfVMg8-MnO6VVlUVVD3uky5cqg7j27N_oVerE=;"
+```
+
+> The above return this output.
+
+```shell
+GET /auth/2fa/totp/email/verify/end HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 37
+Content-Type: application/json
+Cookie: ab_blog=MTU2OTIzNTUzOXxEdi1CQkFFQ180SUFBUkFCRUFBQWJQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRmdBVWRIZHZabUZqZEc5eVgyRjFkR2hmZEc5clpXNEdjM1J5YVc1bkRCb0FHRlY1WlZwSWVXRTJVVVU1YVdWeVRreFNORkpMVDNjOVBRPT18IKd27uBfVMg8-MnO6VVlUVVD3uky5cqg7j27N_oVerE=;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "token": "UyeZHya6QE9ierNLR4RKOw=="
+}
+
+HTTP/1.1 307 Temporary Redirect
+Content-Length: 54
+Content-Type: application/json
+Date: Mon, 23 Sep 2019 10:46:58 GMT
+Set-Cookie: csrf_token=ZeFOZQUXU1XnGWLVIQ4eBAVXQeVz3oKojUIihZyvfnQ=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTIzNTYxOHxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fMwDt2Jx4Bgb9hMDwaaukcbwaJ0l83nwIpeko8z9FD3s; Path=/; Expires=Mon, 23 Sep 2019 22:46:58 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "location": "/auth/2fa/totp/setup",
+    "status": "success"
+}
+
+```
+
+
+
+
+
+
+
+
+
+
 
 ## Register two factor authentication via SMS (Enable) [IDaaS]
 
