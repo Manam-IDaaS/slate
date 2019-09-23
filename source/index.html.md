@@ -586,6 +586,78 @@ Vary: Cookie
 
 ```
 
+### Step5: Confirm Code and get recovery code 
+
+This command get recovery code. This is another factors in 2fa to login. (set cookie from previouse step)
+Param code send in phone number.
+
+```shell
+http -p BHbh POST localhost:3000/auth/2fa/sms/confirm  code="841157" Cookie:"ab_blog=MTU2OTE3NzM5N3xEdi1CQkFFQ180SUFBUkFCRUFBQV84dl9nZ0FGQm5OMGNtbHVad3dNQUFwemJYTmZjMlZqY21WMEJuTjBjbWx1Wnd3SUFBWTROREV4TlRjR2MzUnlhVzVuREJJQUVIUjNiMlpoWTNSdmNsOWhkWFJvWldRR2MzUnlhVzVuREFZQUJIUnlkV1VHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNREFBS2MyMXpYMjUxYldKbGNnWnpkSEpwYm1jTUN3QUpPVE0xTmpNeE5UZzVCbk4wY21sdVp3d0tBQWh6YlhOZmJHRnpkQVp6ZEhKcGJtY01EQUFLTVRVMk9URTNOek01Tnc9PXyK6GBrkST81vsvmX2mf-wqDspeZUCFnsbtmvbyBwi80A==;"
+```
+
+> The above return this output.
+
+```shell
+POST /auth/2fa/sms/confirm HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 18
+Content-Type: application/json
+Cookie: ab_blog=MTU2OTE3NzM5N3xEdi1CQkFFQ180SUFBUkFCRUFBQV84dl9nZ0FGQm5OMGNtbHVad3dNQUFwemJYTmZjMlZqY21WMEJuTjBjbWx1Wnd3SUFBWTROREV4TlRjR2MzUnlhVzVuREJJQUVIUjNiMlpoWTNSdmNsOWhkWFJvWldRR2MzUnlhVzVuREFZQUJIUnlkV1VHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNREFBS2MyMXpYMjUxYldKbGNnWnpkSEpwYm1jTUN3QUpPVE0xTmpNeE5UZzVCbk4wY21sdVp3d0tBQWh6YlhOZmJHRnpkQVp6ZEhKcGJtY01EQUFLTVRVMk9URTNOek01Tnc9PXyK6GBrkST81vsvmX2mf-wqDspeZUCFnsbtmvbyBwi80A==;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "code": "841157"
+}
+
+HTTP/1.1 200 OK
+Content-Length: 502
+Content-Type: application/json
+Date: Sun, 22 Sep 2019 18:38:33 GMT
+Set-Cookie: csrf_token=BNkGKqOTe1UAsTSd4bYPgBi9T120xsv6LvLDO21cDQE=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTE3NzUxM3xEdi1CQkFFQ180SUFBUkFCRUFBQWZQLUNBQU1HYzNSeWFXNW5EQklBRUhSM2IyWmhZM1J2Y2w5aGRYUm9aV1FHYzNSeWFXNW5EQVlBQkhSeWRXVUdjM1J5YVc1bkRBVUFBM1ZwWkFaemRISnBibWNNRHdBTmRHVnpkRUIwWlhOMExtTnZiUVp6ZEhKcGJtY01DZ0FJYzIxelgyeGhjM1FHYzNSeWFXNW5EQXdBQ2pFMU5qa3hOemN6T1RjPXzL6AqZWnuZrPlKIaxxDpccQegrKS9lDzN-A-4_KcfGeQ==; Path=/; Expires=Mon, 23 Sep 2019 06:38:33 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "csrf_token": "NSEXBNn+56N9SThaLZbGpOaRmr+eoEmY4CXjeEvI1box+BEuem2c9n34DMfMIMkk/izV4ipmgmLO1yBDJpTYuw==",
+    "current_user_name": "myyname",
+    "flash_error": "",
+    "flash_success": "",
+    "loggedin": true,
+    "modules": {
+        "auth": true,
+        "confirm": true,
+        "lock": true,
+        "logout": true,
+        "oauth2": true,
+        "otp": true,
+        "recover": true,
+        "register": true,
+        "remember": true
+    },
+    "recovery_codes": [
+        "3ts27-y1mpd",
+        "egmiy-y61ta",
+        "596md-64s5z",
+        "rmyg2-ghkqg",
+        "kwgc8-qjafz",
+        "gfr4m-dtybg",
+        "digih-7473p",
+        "phyn6-q3bub",
+        "bzd98-7j1mg",
+        "tw8zd-toxef"
+    ],
+    "status": "success"
+}
+
+```
+
+
+
+
+
 This endpoint login user on Manam.
 
 ### HTTP Request
