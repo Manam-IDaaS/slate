@@ -699,7 +699,7 @@ Vary: Cookie
 
 ### step2: validate with code and verify code
 This command use to authenticate in 2fa visa SMS. (set cookie from previouse step)
-code and recovery_code describe in previous part (code comes from sms and recovery_code comes from confirm step).
+code and recovery_code params are described in previous part (code comes from sms and recovery_code comes from confirm step).
 
 ```shell
 http -p BHbh POST localhost:3000/auth/2fa/sms/validate  code="155638" recovery_code="jutyg-iyjm0" Cookie:"ab_blog=MTU2OTE3MTI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV80RF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ2dBSWMyMXpYMnhoYzNRR2MzUnlhVzVuREF3QUNqRTFOamt4TnpFeU5qWUdjM1J5YVc1bkRBd0FDbk50YzE5elpXTnlaWFFHYzNSeWFXNW5EQWdBQmpZNE16SXhNdz09fAx01VIvXP9AijVXuGSJbZr62cqy_pKlj_2RvxACOW_1;"
@@ -738,6 +738,69 @@ Vary: Cookie
     "status": "success"
 }
 ```
+
+## Remove two factor authentication via SMS (Disable) [IDaaS]
+
+User can remove 2fa.
+Tips:
+1. set cookie from Login step
+2.code and recovery_code params are described in previous part (code comes from sms and recovery_code comes from confirm step).
+
+
+```shell
+
+http -p BHbh POST localhost:3000/auth/2fa/sms/remove  code="155638" recovery_code="nn4u9-gqs87" Cookie:"ab_blog=MTU2OTE3MTM4NnxEdi1CQkFFQ180SUFBUkFCRUFBQWRQLUNBQU1HYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVNVGN4TWpZMkJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQThBRFhSbGMzUkFkR1Z6ZEM1amIyMEdjM1J5YVc1bkRBc0FDWFIzYjJaaFkzUnZjZ1p6ZEhKcGJtY01CUUFEYzIxenykX1pbSrFB-Mt1uBJEWMaipMg5tzTMn81XJBuqS23CkQ==;"
+
+```
+
+> The above return this output.
+
+```shell
+POST /auth/2fa/sms/remove HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 50
+Content-Type: application/json
+Cookie: ab_blog=MTU2OTE3MTM4NnxEdi1CQkFFQ180SUFBUkFCRUFBQWRQLUNBQU1HYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVNVGN4TWpZMkJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQThBRFhSbGMzUkFkR1Z6ZEM1amIyMEdjM1J5YVc1bkRBc0FDWFIzYjJaaFkzUnZjZ1p6ZEhKcGJtY01CUUFEYzIxenykX1pbSrFB-Mt1uBJEWMaipMg5tzTMn81XJBuqS23CkQ==;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "code": "155638",
+    "recovery_code": "nn4u9-gqs87"
+}
+
+HTTP/1.1 200 OK
+Content-Length: 343
+Content-Type: application/json
+Date: Sun, 22 Sep 2019 16:57:54 GMT
+Set-Cookie: csrf_token=hXnVusD365PV01U3ZAeQa5FpmSVIfyYCjDIP7cvhpkA=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTE3MTQ3NHxEdi1CQkFFQ180SUFBUkFCRUFBQVV2LUNBQUlHYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVNVGN4TWpZMkJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQThBRFhSbGMzUkFkR1Z6ZEM1amIyMD18XpHmS7hzPtGc94Gtiq6FED04wBPkexOM2M311D7igAY=; Path=/; Expires=Mon, 23 Sep 2019 04:57:54 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "csrf_token": "zvt64O5CSBaNJkziCVDwDiUeuplfqKFqZ2edxJg0r4BLgq9aLrWjhVj1GdVtV2BltHcjvBfXh2jrVZIpU9UJwA==",
+    "current_user_name": "myyname",
+    "flash_error": "",
+    "flash_success": "",
+    "loggedin": true,
+    "modules": {
+        "auth": true,
+        "confirm": true,
+        "lock": true,
+        "logout": true,
+        "oauth2": true,
+        "otp": true,
+        "recover": true,
+        "register": true,
+        "remember": true
+    },
+    "status": "success"
+}
+
+```
+
 
 
 
