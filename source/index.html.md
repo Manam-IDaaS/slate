@@ -655,27 +655,89 @@ Vary: Cookie
 ```
 
 
+## Login two factor authentication via SMS [IDaaS]
+
+You should use two factor authentication in your application if you want additional security beyond that of just simple passwords. Each 2fa module supports a different mechanism for verifying a second factor of authentication from a user.
 
 
+### step1 : Login via password
+```shell
+http -p BHbh POST localhost:3000/auth/login -H "apieco_key:<apieco_key>" email="test@test.com" password="1234"
 
-This endpoint login user on Manam.
+```
 
-### HTTP Request
+> The above return this output for Login: (use this cookie for the next step)
 
-`POST https://api.apieco.ir/manam/auth/login`
+```shell
+POST /auth/login HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 46
+Content-Type: application/json
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
 
-### URL Parameters
+{
+    "email": "test@test.com",
+    "password": "1234"
+}
 
-None.
+HTTP/1.1 307 Temporary Redirect
+Content-Length: 56
+Content-Type: application/json
+Date: Sun, 22 Sep 2019 16:54:26 GMT
+Set-Cookie: csrf_token=6LbxhECYsWf/FjlhqwoWs+9zReKOxWYufQ2ZEIUwL50=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTE3MTI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV80RF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ2dBSWMyMXpYMnhoYzNRR2MzUnlhVzVuREF3QUNqRTFOamt4TnpFeU5qWUdjM1J5YVc1bkRBd0FDbk50YzE5elpXTnlaWFFHYzNSeWFXNW5EQWdBQmpZNE16SXhNdz09fAx01VIvXP9AijVXuGSJbZr62cqy_pKlj_2RvxACOW_1; Path=/; Expires=Mon, 23 Sep 2019 04:54:26 GMT; Max-Age=43200
+Vary: Cookie
 
+{
+    "location": "/auth/2fa/sms/validate",
+    "status": "success"
+}
+```
 
-### Data Parameters
+### step2: validate with code and verify code
+This command use to authenticate in 2fa visa SMS. (set cookie from previouse step)
+code and recovery_code describe in previous part (code comes from sms and recovery_code comes from confirm step).
 
-Parameter | Description
---------- | -----------
-type | email or mobile
-email | The email that register 
-password | The password to login
+```shell
+http -p BHbh POST localhost:3000/auth/2fa/sms/validate  code="155638" recovery_code="jutyg-iyjm0" Cookie:"ab_blog=MTU2OTE3MTI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV80RF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ2dBSWMyMXpYMnhoYzNRR2MzUnlhVzVuREF3QUNqRTFOamt4TnpFeU5qWUdjM1J5YVc1bkRBd0FDbk50YzE5elpXTnlaWFFHYzNSeWFXNW5EQWdBQmpZNE16SXhNdz09fAx01VIvXP9AijVXuGSJbZr62cqy_pKlj_2RvxACOW_1;"
+
+```
+
+> The above return this output.
+
+```shell
+POST /auth/2fa/sms/validate HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 50
+Content-Type: application/json
+Cookie: ab_blog=MTU2OTE3MTI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV80RF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ2dBSWMyMXpYMnhoYzNRR2MzUnlhVzVuREF3QUNqRTFOamt4TnpFeU5qWUdjM1J5YVc1bkRBd0FDbk50YzE5elpXTnlaWFFHYzNSeWFXNW5EQWdBQmpZNE16SXhNdz09fAx01VIvXP9AijVXuGSJbZr62cqy_pKlj_2RvxACOW_1;
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+
+{
+    "code": "155638",
+    "recovery_code": "jutyg-iyjm0"
+}
+
+HTTP/1.1 307 Temporary Redirect
+Content-Length: 74
+Content-Type: application/json
+Date: Sun, 22 Sep 2019 16:56:26 GMT
+Set-Cookie: csrf_token=Xntl9G1O59aOKws9l8x1gHyI/pNbF2cN0l5Ygu5JJOQ=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU2OTE3MTM4NnxEdi1CQkFFQ180SUFBUkFCRUFBQWRQLUNBQU1HYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVNVGN4TWpZMkJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQThBRFhSbGMzUkFkR1Z6ZEM1amIyMEdjM1J5YVc1bkRBc0FDWFIzYjJaaFkzUnZjZ1p6ZEhKcGJtY01CUUFEYzIxenykX1pbSrFB-Mt1uBJEWMaipMg5tzTMn81XJBuqS23CkQ==; Path=/; Expires=Mon, 23 Sep 2019 04:56:26 GMT; Max-Age=43200
+Vary: Cookie
+
+{
+    "location": "/",
+    "message": "Successfully Authenticated",
+    "status": "success"
+}
+```
 
 
 
