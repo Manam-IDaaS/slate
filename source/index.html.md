@@ -1124,39 +1124,37 @@ You should use two factor authentication in your application if you want additio
 
 ### step1 : Login via password
 ```shell
-http -p BHbh POST localhost:3000/auth/login -H "apieco_key:<apieco_key>" email="test@test.com" password="1234"
-
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/login -d '{"email": "test@gmail.com","password":"12345","type":"email"}'
 ```
 
 > The above return this output for Login: (use this cookie for the next step)
 
 ```shell
-POST /auth/login HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 46
-Content-Type: application/json
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "email": "test@test.com",
-    "password": "1234"
-}
-
-HTTP/1.1 307 Temporary Redirect
-Content-Length: 56
-Content-Type: application/json
-Date: Sun, 22 Sep 2019 16:54:26 GMT
-Set-Cookie: csrf_token=6LbxhECYsWf/FjlhqwoWs+9zReKOxWYufQ2ZEIUwL50=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTE3MTI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV80RF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ2dBSWMyMXpYMnhoYzNRR2MzUnlhVzVuREF3QUNqRTFOamt4TnpFeU5qWUdjM1J5YVc1bkRBd0FDbk50YzE5elpXTnlaWFFHYzNSeWFXNW5EQWdBQmpZNE16SXhNdz09fAx01VIvXP9AijVXuGSJbZr62cqy_pKlj_2RvxACOW_1; Path=/; Expires=Mon, 23 Sep 2019 04:54:26 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "location": "/auth/2fa/sms/validate",
-    "status": "success"
-}
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/login HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 63
+> 
+* upload completely sent off: 63 out of 63 bytes
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=JpirzjYRGTjJSWgY3iaiykWpGBfYC2JHeTZW6MKVg90=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==; Path=/; Expires=Sun, 29 Sep 2019 08:48:35 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sat, 28 Sep 2019 20:48:35 GMT
+< Content-Length: 365
+< 
+* Connection #0 to host localhost left intact
+{"access_token":"","birthday":"","custome_fields":"\u003cinvalid Value\u003e","email":"test@gmail.com","firstname":"ali","lastname":"lastname","location":"/auth/2fa/sms/validate","mobile":"\u003cinvalid Value\u003e","mobile_seed":"\u003cinvalid Value\u003e","national_code":"","role":"","status":"success","tenant_confirm_url":"","tenant_email":"","type":"email"}
 ```
 
 ### step2: validate with code and verify code
@@ -1164,41 +1162,37 @@ This command use to authenticate in 2fa visa SMS. (set cookie from previouse ste
 code and recovery_code params are described in previous part (code comes from sms and recovery_code comes from confirm step).
 
 ```shell
-http -p BHbh POST localhost:3000/auth/2fa/sms/validate  code="155638" recovery_code="jutyg-iyjm0" Cookie:"ab_blog=MTU2OTE3MTI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV80RF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ2dBSWMyMXpYMnhoYzNRR2MzUnlhVzVuREF3QUNqRTFOamt4TnpFeU5qWUdjM1J5YVc1bkRBd0FDbk50YzE5elpXTnlaWFFHYzNSeWFXNW5EQWdBQmpZNE16SXhNdz09fAx01VIvXP9AijVXuGSJbZr62cqy_pKlj_2RvxACOW_1;"
-
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -v --cookie "ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==;" localhost:3000/auth/2fa/sms/validate -d '{"code":"224380","recovery_code":"i5sr9-r8f27"}'
 ```
 
-> The above return this output.
+> The above return this output for Login: (use this cookie for the next step)
 
 ```shell
-POST /auth/2fa/sms/validate HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 50
-Content-Type: application/json
-Cookie: ab_blog=MTU2OTE3MTI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV80RF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ2dBSWMyMXpYMnhoYzNRR2MzUnlhVzVuREF3QUNqRTFOamt4TnpFeU5qWUdjM1J5YVc1bkRBd0FDbk50YzE5elpXTnlaWFFHYzNSeWFXNW5EQWdBQmpZNE16SXhNdz09fAx01VIvXP9AijVXuGSJbZr62cqy_pKlj_2RvxACOW_1;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "code": "155638",
-    "recovery_code": "jutyg-iyjm0"
-}
-
-HTTP/1.1 307 Temporary Redirect
-Content-Length: 74
-Content-Type: application/json
-Date: Sun, 22 Sep 2019 16:56:26 GMT
-Set-Cookie: csrf_token=Xntl9G1O59aOKws9l8x1gHyI/pNbF2cN0l5Ygu5JJOQ=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTE3MTM4NnxEdi1CQkFFQ180SUFBUkFCRUFBQWRQLUNBQU1HYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVNVGN4TWpZMkJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQThBRFhSbGMzUkFkR1Z6ZEM1amIyMEdjM1J5YVc1bkRBc0FDWFIzYjJaaFkzUnZjZ1p6ZEhKcGJtY01CUUFEYzIxenykX1pbSrFB-Mt1uBJEWMaipMg5tzTMn81XJBuqS23CkQ==; Path=/; Expires=Mon, 23 Sep 2019 04:56:26 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "location": "/",
-    "message": "Successfully Authenticated",
-    "status": "success"
-}
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/2fa/sms/validate HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==;
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> Content-Length: 47
+> 
+* upload completely sent off: 47 out of 47 bytes
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=oNgdwQKLrGhC+A5iSLRSmZMheKK9/U508czNt62aa7Y=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTcwMzg3NnxEdi1CQkFFQ180SUFBUkFCRUFBQWRfLUNBQU1HYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVOekF6TnpFMUJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQklBRUhSbGMzUXhOVUJuYldGcGJDNWpiMjBHYzNSeWFXNW5EQXNBQ1hSM2IyWmhZM1J2Y2daemRISnBibWNNQlFBRGMyMXp8xbl_yMOkW10ponO4hLDZ3zo18YCMl_GM_7wIPUrKgfg=; Path=/; Expires=Sun, 29 Sep 2019 08:51:16 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sat, 28 Sep 2019 20:51:16 GMT
+< Content-Length: 74
+< 
+* Connection #0 to host localhost left intact
+{"location":"/","message":"Successfully Authenticated","status":"success"}
 ```
 
 ## Remove two factor authentication via SMS (Disable) [IDaaS]
@@ -1211,7 +1205,7 @@ Tips:
 
 ```shell
 
-http -p BHbh POST localhost:3000/auth/2fa/sms/remove  code="155638" recovery_code="nn4u9-gqs87" Cookie:"ab_blog=MTU2OTE3MTM4NnxEdi1CQkFFQ180SUFBUkFCRUFBQWRQLUNBQU1HYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVNVGN4TWpZMkJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQThBRFhSbGMzUkFkR1Z6ZEM1amIyMEdjM1J5YVc1bkRBc0FDWFIzYjJaaFkzUnZjZ1p6ZEhKcGJtY01CUUFEYzIxenykX1pbSrFB-Mt1uBJEWMaipMg5tzTMn81XJBuqS23CkQ==;"
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -v --cookie "ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==;" localhost:3000/auth/2fa/sms/remove -d '{"code":"224380","recovery_code":"wbjsn-jxn4n"}'
 
 ```
 
