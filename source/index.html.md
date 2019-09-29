@@ -1205,55 +1205,39 @@ Tips:
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -v --cookie "ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==;" localhost:3000/auth/2fa/sms/remove -d '{"code":"224380","recovery_code":"wbjsn-jxn4n"}'
+curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v --cookie ""ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==;" localhost:3000/auth/2fa/sms/remove -d '{"code":"224380","recovery_code":"h41cv-xp4ca"}'
 
 ```
 
 > The above return this output.
 
 ```shell
-POST /auth/2fa/sms/remove HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 50
-Content-Type: application/json
-Cookie: ab_blog=MTU2OTE3MTM4NnxEdi1CQkFFQ180SUFBUkFCRUFBQWRQLUNBQU1HYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVNVGN4TWpZMkJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQThBRFhSbGMzUkFkR1Z6ZEM1amIyMEdjM1J5YVc1bkRBc0FDWFIzYjJaaFkzUnZjZ1p6ZEhKcGJtY01CUUFEYzIxenykX1pbSrFB-Mt1uBJEWMaipMg5tzTMn81XJBuqS23CkQ==;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "code": "155638",
-    "recovery_code": "nn4u9-gqs87"
-}
-
-HTTP/1.1 200 OK
-Content-Length: 343
-Content-Type: application/json
-Date: Sun, 22 Sep 2019 16:57:54 GMT
-Set-Cookie: csrf_token=hXnVusD365PV01U3ZAeQa5FpmSVIfyYCjDIP7cvhpkA=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTE3MTQ3NHxEdi1CQkFFQ180SUFBUkFCRUFBQVV2LUNBQUlHYzNSeWFXNW5EQW9BQ0hOdGMxOXNZWE4wQm5OMGNtbHVad3dNQUFveE5UWTVNVGN4TWpZMkJuTjBjbWx1Wnd3RkFBTjFhV1FHYzNSeWFXNW5EQThBRFhSbGMzUkFkR1Z6ZEM1amIyMD18XpHmS7hzPtGc94Gtiq6FED04wBPkexOM2M311D7igAY=; Path=/; Expires=Mon, 23 Sep 2019 04:57:54 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "csrf_token": "zvt64O5CSBaNJkziCVDwDiUeuplfqKFqZ2edxJg0r4BLgq9aLrWjhVj1GdVtV2BltHcjvBfXh2jrVZIpU9UJwA==",
-    "current_user_name": "myyname",
-    "flash_error": "",
-    "flash_success": "",
-    "loggedin": true,
-    "modules": {
-        "auth": true,
-        "confirm": true,
-        "lock": true,
-        "logout": true,
-        "oauth2": true,
-        "otp": true,
-        "recover": true,
-        "register": true,
-        "remember": true
-    },
-    "status": "success"
-}
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/2fa/sms/remove HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTczNzAzNHxEdi1CQkFFQ180SUFBUkFCRUFBQWRfLUNBQU1HYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUN3QUpkSGR2Wm1GamRHOXlCbk4wY21sdVp3d0ZBQU56YlhNR2MzUnlhVzVuREFvQUNITnRjMTlzWVhOMEJuTjBjbWx1Wnd3TUFBb3hOVFk1TnpNMk9UWTN88eZJP4-UKCFdIUsOvrpFQkV1QsWkH1_6t1x_ePBwkh8=;
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 47
+> 
+* upload completely sent off: 47 out of 47 bytes
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Set-Cookie: csrf_token=5jzL8V/RILT4kZrwrHgzYGYLQjzlehK6EHzAB/x+F/o=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTczNzA5MnxEdi1CQkFFQ180SUFBUkFCRUFBQVZmLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM016WTVOamM9fMx0mVj8uNfqUjiFEz55Owmk1tCTQO9ifz35PKjmxES2; Path=/; Expires=Sun, 29 Sep 2019 18:04:52 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 06:04:52 GMT
+< Content-Length: 389
+< 
+* Connection #0 to host localhost left intact
+{"csrf_token":"Ow8w6jDD9J3KBsKN4MYOpPxBpY7BG2AlSLpTxo85OLndM/sbbxLUKTKXWH1Mvj3EmkrnsiRhcp9YxpPBc0cvQw==","current_user_name":"","flash_error":"","flash_success":"","loggedin":true,"modules":{"auth":true,"auth-custom":true,"confirm":true,"lock":true,"logout":true,"oauth2":true,"recover":true,"recover-custom":true,"register":true,"register-custom":trueH "user_type:email" -v  localhost:3000/auth/login -d '{"email": "test15@gmail.com","password":"12345","type":"email"}'
 
 ```
 
