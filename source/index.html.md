@@ -428,76 +428,76 @@ Tip:
 
 ### step1 :Login:
 ```shell
-http -p BHbh POST localhost:3000/auth/login -H "apieco_key:<apieco_key>" email="test@test.com" password="1234"
+
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/login -d '{"email": "test16@gmail.com","password":"12345","type":"email"}'
 
 ```
 
 > The above return this output for Login: (use this cookie for the next step)
 ```shell
-POST /auth/login HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 46
-Content-Type: application/json
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "email": "test@test.com",
-    "password": "1234"
-}
-
-HTTP/1.1 307 Temporary Redirect
-Content-Length: 35
-Content-Type: application/json
-Date: Mon, 23 Sep 2019 10:44:45 GMT
-Set-Cookie: csrf_token=2FL0EDK4UIN5lDaidm8GzoYvim0QCHoi4iF/ZdMF6S0=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNTQ4NXxEdi1CQkFFQ180SUFBUkFCRUFBQUt2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXw43TZdnSFlWDi8BNoOHAUmbk7WnKt-jnml5Vgmn5bpuA==; Path=/; Expires=Mon, 23 Sep 2019 22:44:45 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "location": "/",
-    "status": "success"
-}
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/login HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 63
+> 
+* upload completely sent off: 63 out of 63 bytes
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=nnDh5GdXsqe8WO/zzghf4/x8gpChDliLKaEBcXIE698=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0MzY2MHxEdi1CQkFFQ180SUFBUkFCRUFBQUxmLUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18JzpeVTJkDDLhaFhd32c9JU2j3ZTRSV4sc8Byg954PVQ=; Path=/; Expires=Sun, 29 Sep 2019 19:54:20 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 07:54:20 GMT
+< Content-Length: 344
+< 
+* Connection #0 to host localhost left intact
+{"access_token":"","birthday":"","custome_fields":"\u003cinvalid Value\u003e","email":"test16@gmail.com","firstname":"ali","lastname":"lastname","location":"/","mobile":"\u003cinvalid Value\u003e","mobile_seed":"\u003cinvalid Value\u003e","national_code":"","role":"","status":"success","tenant_confirm_url":"","tenant_email":"","type":"email"}
 ```
 
 ### step 2: Verify Email
 This step use cookie from previous step and set code param with email.
 
 ```shell
-http -p BHbh POST  localhost:3000/auth/2fa/totp/email/verify code="test@test.com" Cookie:"ab_blog=MTU2OTIzNTQ4NXxEdi1CQkFFQ180SUFBUkFCRUFBQUt2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXw43TZdnSFlWDi8BNoOHAUmbk7WnKt-jnml5Vgmn5bpuA==;"
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/email/verify -d {"code":"test16@gmail.com"} --cookie "ab_blog=MTU2OTc0MzY2MHxEdi1CQkFFQ180SUFBUkFCRUFBQUxmLUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18JzpeVTJkDDLhaFhd32c9JU2j3ZTRSV4sc8Byg954PVQ="
+
+
 ```
 > The above return this output and send verify link to email.
 
 ```shell
-POST /auth/2fa/totp/email/verify HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 25
-Content-Type: application/json
-Cookie: ab_blog=MTU2OTIzNTQ4NXxEdi1CQkFFQ180SUFBUkFCRUFBQUt2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXw43TZdnSFlWDi8BNoOHAUmbk7WnKt-jnml5Vgmn5bpuA==;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "code": "test@test.com"
-}
-
-HTTP/1.1 307 Temporary Redirect
-Content-Length: 98
-Content-Type: application/json
-Date: Mon, 23 Sep 2019 10:45:39 GMT
-Set-Cookie: csrf_token=jiK/MlwuO87gfl8f5Wb6bAs14L4+Wn4BVsyXefFZswo=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNTUzOXxEdi1CQkFFQ180SUFBUkFCRUFBQWJQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRmdBVWRIZHZabUZqZEc5eVgyRjFkR2hmZEc5clpXNEdjM1J5YVc1bkRCb0FHRlY1WlZwSWVXRTJVVVU1YVdWeVRreFNORkpMVDNjOVBRPT18IKd27uBfVMg8-MnO6VVlUVVD3uky5cqg7j27N_oVerE=; Path=/; Expires=Mon, 23 Sep 2019 22:45:39 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "location": "/",
-    "message": "An e-mail has been sent to confirm 2FA activation.",
-    "status": "success"
-}
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/2fa/totp/email/verify HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTc0MzY2MHxEdi1CQkFFQ180SUFBUkFCRUFBQUxmLUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18JzpeVTJkDDLhaFhd32c9JU2j3ZTRSV4sc8Byg954PVQ=
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 23
+> 
+* upload completely sent off: 23 out of 23 bytes
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=/e9voyv6i1J6GbxKtttIIwqnOpyV5tIHd4QPNfzCF8w=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0Mzc0MnxEdi1CQkFFQ180SUFBUkFCRUFBQWJfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUZnQVVkSGR2Wm1GamRHOXlYMkYxZEdoZmRHOXJaVzRHYzNSeWFXNW5EQm9BR0U1V1RVTllhbWRxVFdGMVdtUkJlalZuWkZGaVUxRTlQUT09fMxv1mxHUSDH6Yn83cD4RodGuaXOWYHbhP438UicbuKA; Path=/; Expires=Sun, 29 Sep 2019 19:55:42 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 07:55:42 GMT
+< Content-Length: 98
+< 
+* Connection #0 to host localhost left intact
+{"location":"/","message":"An e-mail has been sent to confirm 2FA activation.","status":"success"}
 
 ```
 
@@ -506,39 +506,39 @@ Vary: Cookie
 This step verfy link that be send to email. (use cookie from previous step )
 
 ```shell
-http -p BHbh GET  localhost:3000/auth/2fa/totp/email/verify/end token="UyeZHya6QE9ierNLR4RKOw=="  Cookie:"ab_blog=MTU2OTIzNTUzOXxEdi1CQkFFQ180SUFBUkFCRUFBQWJQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRmdBVWRIZHZabUZqZEc5eVgyRjFkR2hmZEc5clpXNEdjM1J5YVc1bkRCb0FHRlY1WlZwSWVXRTJVVVU1YVdWeVRreFNORkpMVDNjOVBRPT18IKd27uBfVMg8-MnO6VVlUVVD3uky5cqg7j27N_oVerE=;"
+
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/email/verify/end -d '{"token":"NVMCXjgjMauZdAz5gdQbSQ=="}'  --cookie "ab_blog=MTU2OTc0Mzc0MnxEdi1CQkFFQ180SUFBUkFCRUFBQWJfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUZnQVVkSGR2Wm1GamRHOXlYMkYxZEdoZmRHOXJaVzRHYzNSeWFXNW5EQm9BR0U1V1RVTllhbWRxVFdGMVdtUkJlalZuWkZGaVUxRTlQUT09fMxv1mxHUSDH6Yn83cD4RodGuaXOWYHbhP438UicbuKA;"
+
 ```
 
 > The above return this output.
 
 ```shell
-GET /auth/2fa/totp/email/verify/end HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 37
-Content-Type: application/json
-Cookie: ab_blog=MTU2OTIzNTUzOXxEdi1CQkFFQ180SUFBUkFCRUFBQWJQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRmdBVWRIZHZabUZqZEc5eVgyRjFkR2hmZEc5clpXNEdjM1J5YVc1bkRCb0FHRlY1WlZwSWVXRTJVVVU1YVdWeVRreFNORkpMVDNjOVBRPT18IKd27uBfVMg8-MnO6VVlUVVD3uky5cqg7j27N_oVerE=;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "token": "UyeZHya6QE9ierNLR4RKOw=="
-}
-
-HTTP/1.1 307 Temporary Redirect
-Content-Length: 54
-Content-Type: application/json
-Date: Mon, 23 Sep 2019 10:46:58 GMT
-Set-Cookie: csrf_token=ZeFOZQUXU1XnGWLVIQ4eBAVXQeVz3oKojUIihZyvfnQ=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNTYxOHxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fMwDt2Jx4Bgb9hMDwaaukcbwaJ0l83nwIpeko8z9FD3s; Path=/; Expires=Mon, 23 Sep 2019 22:46:58 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "location": "/auth/2fa/totp/setup",
-    "status": "success"
-}
-
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> GET /auth/2fa/totp/email/verify/end HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTc0Mzc0MnxEdi1CQkFFQ180SUFBUkFCRUFBQWJfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUZnQVVkSGR2Wm1GamRHOXlYMkYxZEdoZmRHOXJaVzRHYzNSeWFXNW5EQm9BR0U1V1RVTllhbWRxVFdGMVdtUkJlalZuWkZGaVUxRTlQUT09fMxv1mxHUSDH6Yn83cD4RodGuaXOWYHbhP438UicbuKA;
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 36
+> 
+* upload completely sent off: 36 out of 36 bytes
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=mWPcLe6P2qo0Pk2QHcNBoJJqBbiSK8goIQ7kVXJwvNw=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0NDA3MXxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXxwyK9CAuxaZOhOe_dxxdhuwjxmHgdOrAMwsglg5g64-g==; Path=/; Expires=Sun, 29 Sep 2019 20:01:11 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 08:01:11 GMT
+< Content-Length: 54
+< 
+* Connection #0 to host localhost left intact
+{"location":"/auth/2fa/totp/setup","status":"success"}
 ```
 
 ### step 4: Set up with Get
@@ -546,49 +546,37 @@ Vary: Cookie
 This step and the next step are the background for preparation and display QR code. (use cookie from previous step )
 
 ```shell
-http -p BHbh GET  localhost:3000/auth/2fa/totp/setup Cookie:"ab_blog=MTU2OTIzNTYxOHxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fMwDt2Jx4Bgb9hMDwaaukcbwaJ0l83nwIpeko8z9FD3s;"
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/setup --cookie "ab_blog=MTU2OTc0NDA3MXxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXxwyK9CAuxaZOhOe_dxxdhuwjxmHgdOrAMwsglg5g64-g=="
+
 ```
 
 > The above return this output.
 
 ```shell
-GET /auth/2fa/totp/setup HTTP/1.1
-Accept: */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Cookie: ab_blog=MTU2OTIzNTYxOHxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fMwDt2Jx4Bgb9hMDwaaukcbwaJ0l83nwIpeko8z9FD3s;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-
-
-HTTP/1.1 200 OK
-Content-Length: 343
-Content-Type: application/json
-Date: Mon, 23 Sep 2019 10:48:16 GMT
-Set-Cookie: csrf_token=GddII5bFs+aXE8zrX4RQaF2VexgV/7tRqqqrt0X9sD4=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1; Path=/; Expires=Mon, 23 Sep 2019 22:48:16 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "csrf_token": "KCIeoVA3ZFmKIpdO4GmGebpFezo7njGYd3Hx22wWxKUx9VaCxvLXvx0xW6W/7dYR59AAIi5hisnd21psKet0mw==",
-    "current_user_name": "myyname",
-    "flash_error": "",
-    "flash_success": "",
-    "loggedin": true,
-    "modules": {
-        "auth": true,
-        "confirm": true,
-        "lock": true,
-        "logout": true,
-        "oauth2": true,
-        "otp": true,
-        "recover": true,
-        "register": true,
-        "remember": true
-    },
-    "status": "success"
-}
+Note: Unnecessary use of -X or --request, GET is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> GET /auth/2fa/totp/setup HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTc0NDA3MXxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXxwyK9CAuxaZOhOe_dxxdhuwjxmHgdOrAMwsglg5g64-g==
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> 
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Set-Cookie: csrf_token=67pbX3sg+VRU93hw0vQTmmhGOFFUTjwr+pR6Myzn6fQ=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0NDE4MHxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXzTigFKYnQo_iEVpF4n9OXJXJiV84Jx8sm9YWQNaOnqYw==; Path=/; Expires=Sun, 29 Sep 2019 20:03:00 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 08:03:00 GMT
+< Content-Length: 389
+< 
+* Connection #0 to host localhost left intact
+{"csrf_token":"W18D1fFt8KmHayO80yDUAi5zhnq/itsHJhswOoGgM9aw5ViKik0J/dOcW8wB1MeYRjW+K+vE5yzcj0oJrUfaIg==","current_user_name":"","flash_error":"","flash_success":"","loggedin":true,"modules":{"auth":true,"auth-custom":true,"confirm":true,"lock":true,"logout":true,"oauth2":true,"recover":true,"recover-custom":true,"register":true,"register-custom":true,"remember":true},"status":"success"}
 
 ```
 
@@ -597,102 +585,76 @@ Vary: Cookie
 This step and the previous step are the background for preparation and display QR code. (use cookie from previous step )
 
 ```shell
-http -p BHbh POST  localhost:3000/auth/2fa/totp/setup Cookie:"ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1;"
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/setup --cookie "ab_blog=MTU2OTc0NDE4MHxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXzTigFKYnQo_iEVpF4n9OXJXJiV84Jx8sm9YWQNaOnqYw==;"
+
 ```
 
 > The above return this output.
 
 ```shell
-POST /auth/2fa/totp/setup HTTP/1.1
-Accept: */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 0
-Cookie: ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-
-
-HTTP/1.1 302 Found
-Content-Length: 0
-Date: Mon, 23 Sep 2019 10:48:56 GMT
-Location: /auth/2fa/totp/confirm
-Set-Cookie: csrf_token=2u4T82qTkXUJyI04Gp/X0fQYLiKFVUqQelVI2g4JXOs=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==; Path=/; Expires=Mon, 23 Sep 2019 22:48:56 GMT; Max-Age=43200
-Vary: Cookie
-
-```
-
-### step 6: Set up with POST
-
-This step and the previous step are the background for preparation and display QR code. (use cookie from previous step )
-
-```shell
-http -p BHbh POST  localhost:3000/auth/2fa/totp/setup Cookie:"ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1;"
-```
-
-> The above return this output.
-
-```shell
-POST /auth/2fa/totp/setup HTTP/1.1
-Accept: */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 0
-Cookie: ab_blog=MTU2OTIzNTY5NnxEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fNm_r3aZEXm8OWkG6TLLQHnv5HXfbH7phcmZBq2sjDC1;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-
-
-HTTP/1.1 302 Found
-Content-Length: 0
-Date: Mon, 23 Sep 2019 10:48:56 GMT
-Location: /auth/2fa/totp/confirm
-Set-Cookie: csrf_token=2u4T82qTkXUJyI04Gp/X0fQYLiKFVUqQelVI2g4JXOs=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==; Path=/; Expires=Mon, 23 Sep 2019 22:48:56 GMT; Max-Age=43200
-Vary: Cookie
-
-
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/2fa/totp/setup HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTc0NDE4MHxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXzTigFKYnQo_iEVpF4n9OXJXJiV84Jx8sm9YWQNaOnqYw==;
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> 
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=P8KNpXyIeQi+jqn0a10jhOMpgCUVV43hqiq6wby1Bd0=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0NDI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV81al9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVk5HVFZKQk4wbFNRbFpVV2xoV1JWZFROa2hGVVRSWlRGcE1ValpSUmxJR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01FZ0FRZEdWemRERTJRR2R0WVdsc0xtTnZiUVp6ZEhKcGJtY01FZ0FRZEhkdlptRmpkRzl5WDJGMWRHaGxaQVp6ZEhKcGJtY01CZ0FFZEhKMVpRPT18oYFsxLdUi7weJmG7F1I7dUkZtjdTNSbtHY8IJhObza4=; Path=/; Expires=Sun, 29 Sep 2019 20:04:26 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 08:04:26 GMT
+< Content-Length: 56
+< 
+* Connection #0 to host localhost left intact
+{"location":"/auth/2fa/totp/confirm","status":"success"}
 ```
 
 
-### step 7: Display QR code
+### step 6: Display QR code
 
 This step display QR code and user have to scan QR code and use code from that that change every minutues. (use cookie from previous step )
 
 ```shell
-http -p BHbh GET  localhost:3000/auth/2fa/totp/qr Cookie:"ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==;"
+ curl -X GET -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/qr --cookie "ab_blog=MTU2OTc0NDI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV81al9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVk5HVFZKQk4wbFNRbFpVV2xoV1JWZFROa2hGVVRSWlRGcE1ValpSUmxJR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01FZ0FRZEdWemRERTJRR2R0WVdsc0xtTnZiUVp6ZEhKcGJtY01FZ0FRZEhkdlptRmpkRzl5WDJGMWRHaGxaQVp6ZEhKcGJtY01CZ0FFZEhKMVpRPT18oYFsxLdUi7weJmG7F1I7dUkZtjdTNSbtHY8IJhObza4=;"
 ```
 
 > The above return this output.
 
 ```shell
-GET /auth/2fa/totp/qr HTTP/1.1
-Accept: */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Cookie: ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-
-
-HTTP/1.1 200 OK
-Content-Length: 1390
-Content-Type: image/png
-Date: Mon, 23 Sep 2019 10:50:07 GMT
-Set-Cookie: csrf_token=b3GLiRKaeE6quSYoJtn9+qozPwQDGXUkdRR1eGNKs0k=; Max-Age=31536000
-Vary: Cookie
-
-
-
-+-----------------------------------------+
-| NOTE: binary data not shown in terminal |
-+-----------------------------------------+
-
-
+Note: Unnecessary use of -X or --request, GET is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> GET /auth/2fa/totp/qr HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTc0NDI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV81al9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVk5HVFZKQk4wbFNRbFpVV2xoV1JWZFROa2hGVVRSWlRGcE1ValpSUmxJR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01FZ0FRZEdWemRERTJRR2R0WVdsc0xtTnZiUVp6ZEhKcGJtY01FZ0FRZEhkdlptRmpkRzl5WDJGMWRHaGxaQVp6ZEhKcGJtY01CZ0FFZEhKMVpRPT18oYFsxLdUi7weJmG7F1I7dUkZtjdTNSbtHY8IJhObza4=;
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> 
+< HTTP/1.1 200 OK
+< Content-Type: image/png
+< Set-Cookie: csrf_token=A9Ibs6rcQJkJQ7auCxWxlDQZG6dsXH+wMA3QMplgVoQ=; Max-Age=31536000
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 08:07:35 GMT
+< Content-Length: 1411
+< 
+Warning: Binary output can mess up your terminal. Use "--output -" to tell 
+Warning: curl to output it to your terminal anyway, or consider "--output 
+Warning: <FILE>" to save to a file.
+* Failed writing body (0 != 1411)
+* stopped the pause stream!
+* Closing connection 0
 ```
 
 Note : In shell can not show birnay data use browser or other tools like POSTMAN.
@@ -703,65 +665,41 @@ Note : In shell can not show birnay data use browser or other tools like POSTMAN
 This step use code from QR code that setup in mobile app or other ways from previous step and get recovery code. (use cookie from previous step )
 
 ```shell
-http -p BHbh POST  localhost:3000/auth/2fa/totp/confirm code="396259" Cookie:"ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw=="
+
+curl -X POST -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/confirm  -d '{"code":"404870"}' --cookie "ab_blog=MTU2OTc0NDI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV81al9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVk5HVFZKQk4wbFNRbFpVV2xoV1JWZFROa2hGVVRSWlRGcE1ValpSUmxJR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01FZ0FRZEdWemRERTJRR2R0WVdsc0xtTnZiUVp6ZEhKcGJtY01FZ0FRZEhkdlptRmpkRzl5WDJGMWRHaGxaQVp6ZEhKcGJtY01CZ0FFZEhKMVpRPT18oYFsxLdUi7weJmG7F1I7dUkZtjdTNSbtHY8IJhObza4=;"
+
+
 ```
 
 > The above return this output.
 
 ```shell
-POST /auth/2fa/totp/confirm HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 18
-Content-Type: application/json
-Cookie: ab_blog=MTU2OTIzNTczNnxEdi1CQkFFQ180SUFBUkFCRUFBQV81WF9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVTFHUzFFelJVVlpWRW8zVnpKRFdVTlBWMWhEVjFWWVdqSkNRMUpTVjBrR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01Ed0FOZEdWemRFQjBaWE4wTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXyhpO-zAeTtkJ6Fes8_LNLJG5dtsYSBuwCKlmR9k3EQdw==
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "code": "396259"
-}
-
-HTTP/1.1 200 OK
-Content-Length: 502
-Content-Type: application/json
-Date: Mon, 23 Sep 2019 10:52:53 GMT
-Set-Cookie: csrf_token=cOZlegLkkp2P3eBkoy1WPc43x6CjMk2tRO3JagRZxqU=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNTk3M3xEdi1CQkFFQ180SUFBUkFCRUFBQVZQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNRWdBUWRIZHZabUZqZEc5eVgyRjFkR2hsWkFaemRISnBibWNNQmdBRWRISjFaUT09fFaWSRTIhAEDaUUMCQWkvh_h7DzheUMIXythE_yEhrpV; Path=/; Expires=Mon, 23 Sep 2019 22:52:53 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "csrf_token": "PJAr2TFAiuCChIODd2C+P8CZLJm+Mjg1sBQRXUOY3GNMdk6jM6QYfQ1ZY+fUTegCDq7rOR0AdZj0+dg3R8Eaxg==",
-    "current_user_name": "myyname",
-    "flash_error": "",
-    "flash_success": "",
-    "loggedin": true,
-    "modules": {
-        "auth": true,
-        "confirm": true,
-        "lock": true,
-        "logout": true,
-        "oauth2": true,
-        "otp": true,
-        "recover": true,
-        "register": true,
-        "remember": true
-    },
-    "recovery_codes": [
-        "qh7eg-78iii",
-        "2i56t-26sma",
-        "ipnjp-hoa7r",
-        "ohkmj-uamj3",
-        "q51ut-tb9n5",
-        "jvacz-vd21u",
-        "5gf63-7x7dc",
-        "khb8f-6wucy",
-        "ue647-9vqqk",
-        "9k8mu-f62gs"
-    ],
-    "status": "success"
-}
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/2fa/totp/confirm HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTc0NDI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV81al9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVk5HVFZKQk4wbFNRbFpVV2xoV1JWZFROa2hGVVRSWlRGcE1ValpSUmxJR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01FZ0FRZEdWemRERTJRR2R0WVdsc0xtTnZiUVp6ZEhKcGJtY01FZ0FRZEhkdlptRmpkRzl5WDJGMWRHaGxaQVp6ZEhKcGJtY01CZ0FFZEhKMVpRPT18oYFsxLdUi7weJmG7F1I7dUkZtjdTNSbtHY8IJhObza4=;
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 17
+> Content-Type: application/x-www-form-urlencoded
+> 
+* upload completely sent off: 17 out of 17 bytes
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Set-Cookie: csrf_token=hX0/dMNBh25+TgZZLabjO0xsFKfl7tTg9Xr8C10wAz0=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0NDY3MHxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXzyx9MERC3HTgSedqPlmfRCDI3RyHgAgtPb8XMNJwwnvA==; Path=/; Expires=Sun, 29 Sep 2019 20:11:10 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 08:11:10 GMT
+< Content-Length: 548
+< 
+* Connection #0 to host localhost left intact
+{"csrf_token":"OICZ97by/Z84KRXjG2MZRUJRJIRYpAxnQa006r98hQa9/aaDdbN68UZnE7o2xfp+Dj0wI71K2Ie018jh4kyGOw==","current_user_name":"","flash_error":"","flash_success":"","loggedin":true,"modules":{"auth":true,"auth-custom":true,"confirm":true,"lock":true,"logout":true,"oauth2":true,"recover":true,"recover-custom":true,"register":true,"register-custom":true,"remember":true},"recovery_codes":["ee1zb-91jy1","qfc7q-ukd1d","hhdcj-q99w1","he8dg-jn9vf","86nqh-00ru6","egir1-u4cut","i1228-gntn5","xe4vz-af6i6","qzdcr-2756b","k1ujj-v5mty"],"status":"success"}
 
 ```
 
@@ -771,39 +709,39 @@ You should use two factor authentication in your application if you want additio
 
 ### step1 : Login via password
 ```shell
-http -p BHbh POST localhost:3000/auth/login -H "apieco_key:<apieco_key>" email="test@test.com" password="1234"
+
+curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/login -d '{"email": "test16@gmail.com","password":"12345","type":"email"}'
 
 ```
 
 > The above return this output for Login: (use this cookie for the next step)
 
 ```shell
-POST /auth/login HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 46
-Content-Type: application/json
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "email": "test@test.com",
-    "password": "1234"
-}
-
-HTTP/1.1 307 Temporary Redirect
-Content-Length: 57
-Content-Type: application/json
-Date: Mon, 23 Sep 2019 10:53:13 GMT
-Set-Cookie: csrf_token=jmmT9/4pPYwSKslwmrV5t6SRZBlmM7hSWvh4hLs7csM=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNTk5M3xEdi1CQkFFQ180SUFBUkFCRUFBQU1fLUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXwG4MkM6K4ldMpRxUE8mSfBWRCt_pxcHTt8TTqamXaCSA==; Path=/; Expires=Mon, 23 Sep 2019 22:53:13 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "location": "/auth/2fa/totp/validate",
-    "status": "success"
-}
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/login HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 63
+> 
+* upload completely sent off: 63 out of 63 bytes
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=28bMalNpc8GkE15ROqCiIcqYMD7Zp5Qe2OHpLMkvUng=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0NTQ5NnxEdi1CQkFFQ180SUFBUkFCRUFBQU52LUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18-RcNmidjCGEPnSWLXxHg4n6TdTpa8gCLQU47-K3UxAA=; Path=/; Expires=Sun, 29 Sep 2019 20:24:56 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 08:24:56 GMT
+< Content-Length: 366
+< 
+* Connection #0 to host localhost left intact
+{"access_token":"","birthday":"","custome_fields":"\u003cinvalid Value\u003e","email":"test16@gmail.com","firstname":"ali","lastname":"lastname","location":"/auth/2fa/totp/validate","mobile":"\u003cinvalid Value\u003e","mobile_seed":"\u003cinvalid Value\u003e","national_code":"","role":"","status":"success","tenant_confirm_url":"","tenant_email":"","type":"email"}
 
 ```
 
@@ -812,40 +750,42 @@ This command use to authenticate in 2fa visa toyp. (set cookie from previouse st
 code and recovery_code params are described in previous part (code comes from sms and recovery_code comes from confirm step).
 
 ```shell
-http -p BHbh POST  localhost:3000/auth/2fa/totp/validate code="622153" recovery_code="qh7eg-78iii" Cookie:"ab_blog=MTU2OTIzNTk5M3xEdi1CQkFFQ180SUFBUkFCRUFBQU1fLUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXwG4MkM6K4ldMpRxUE8mSfBWRCt_pxcHTt8TTqamXaCSA==;"
+
+curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/validate -d '{"code": "326019","recovery_code":"hhdcj-q99w1"}' --cookie "ab_blog=MTU2OTc0NTQ5NnxEdi1CQkFFQ180SUFBUkFCRUFBQU52LUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18-RcNmidjCGEPnSWLXxHg4n6TdTpa8gCLQU47-K3UxAA="
+
 ```
 
 > The above return this output.
 
 ```shell
-POST /auth/2fa/totp/validate HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 50
-Content-Type: application/json
-Cookie: ab_blog=MTU2OTIzNTk5M3xEdi1CQkFFQ180SUFBUkFCRUFBQU1fLUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXwG4MkM6K4ldMpRxUE8mSfBWRCt_pxcHTt8TTqamXaCSA==;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
 
-{
-    "code": "622153",
-    "recovery_code": "qh7eg-78iii"
-}
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/2fa/totp/validate HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTc0NTQ5NnxEdi1CQkFFQ180SUFBUkFCRUFBQU52LUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18-RcNmidjCGEPnSWLXxHg4n6TdTpa8gCLQU47-K3UxAA=
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 48
+> 
+* upload completely sent off: 48 out of 48 bytes
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=RSg9qBoFlUvlH5UlJY8FMsj9VIWlXXHOPVcQPDnCMEU=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0NTYwMnxEdi1CQkFFQ180SUFBUkFCRUFBQVVQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUN3QUpkSGR2Wm1GamRHOXlCbk4wY21sdVp3d0dBQVIwYjNSd3yRxbe0gnzqbmD2pbgqx8KkviJxktBCpWQ1otm2rccKxw==; Path=/; Expires=Sun, 29 Sep 2019 20:26:42 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 08:26:42 GMT
+< Content-Length: 74
+< 
+* Connection #0 to host localhost left intact
+{"location":"/","message":"Successfully Authenticated","status":"success"}
 
-HTTP/1.1 307 Temporary Redirect
-Content-Length: 74
-Content-Type: application/json
-Date: Mon, 23 Sep 2019 10:56:16 GMT
-Set-Cookie: csrf_token=8iFQbRUx6q8n8l4UrCyHtGZYakTNBfPd74PK1236/+g=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNjE3NnxEdi1CQkFFQ180SUFBUkFCRUFBQVRmLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ3dBSmRIZHZabUZqZEc5eUJuTjBjbWx1Wnd3R0FBUjBiM1J3fC2Q-SnGpsB5B-Spyo1tRtrhJokNfxxBpvPKdB_59zaJ; Path=/; Expires=Mon, 23 Sep 2019 22:56:16 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "location": "/",
-    "message": "Successfully Authenticated",
-    "status": "success"
-}
 ```
 
 
@@ -858,55 +798,40 @@ Tips:
 
 
 ```shell
+curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/remove -d '{"code": "302922","recovery_code":"egir1-u4cut"}' --cookie "ab_blog=MTU2OTc0NTYwMnxEdi1CQkFFQ180SUFBUkFCRUFBQVVQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUN3QUpkSGR2Wm1GamRHOXlCbk4wY21sdVp3d0dBQVIwYjNSd3yRxbe0gnzqbmD2pbgqx8KkviJxktBCpWQ1otm2rccKxw==; "
 
-http -p BHbh POST localhost:3000/auth/2fa/totp/remove code="114381" recovery_code="2i56t-26sma" Cookie:"ab_blog=MTU2OTIzNjE3NnxEdi1CQkFFQ180SUFBUkFCRUFBQVRmLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ3dBSmRIZHZabUZqZEc5eUJuTjBjbWx1Wnd3R0FBUjBiM1J3fC2Q-SnGpsB5B-Spyo1tRtrhJokNfxxBpvPKdB_59zaJ;"
+
 ```
 
 > The above return this output.
 
 ```shell
-POST /auth/2fa/totp/remove HTTP/1.1
-Accept: application/json, */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Content-Length: 50
-Content-Type: application/json
-Cookie: ab_blog=MTU2OTIzNjE3NnxEdi1CQkFFQ180SUFBUkFCRUFBQVRmLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlFaemRISnBibWNNQ3dBSmRIZHZabUZqZEc5eUJuTjBjbWx1Wnd3R0FBUjBiM1J3fC2Q-SnGpsB5B-Spyo1tRtrhJokNfxxBpvPKdB_59zaJ;
-Host: localhost:3000
-User-Agent: HTTPie/0.9.8
-
-{
-    "code": "114381",
-    "recovery_code": "2i56t-26sma"
-}
-
-HTTP/1.1 200 OK
-Content-Length: 343
-Content-Type: application/json
-Date: Mon, 23 Sep 2019 10:58:57 GMT
-Set-Cookie: csrf_token=QuZTwCF8KTTdaVXEmUS21MVC6DfOzJvOfQsxO2Ev0pE=; Max-Age=31536000
-Set-Cookie: ab_blog=MTU2OTIzNjMzN3xEdi1CQkFFQ180SUFBUkFCRUFBQUt2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUR3QU5kR1Z6ZEVCMFpYTjBMbU52YlE9PXx7_OwN5f_ZuxcTnCXg033zd0_LbNUBoBDI6vrpjpRQ5w==; Path=/; Expires=Mon, 23 Sep 2019 22:58:57 GMT; Max-Age=43200
-Vary: Cookie
-
-{
-    "csrf_token": "T2EapDfZeQ1wZxNjNcjJVJ2tgNsTajPDMbhzYnOSWHYNh0lkFqVQOa0ORqesjH+AWO9o7N2mqA1Ms0JZEr2K5w==",
-    "current_user_name": "myyname",
-    "flash_error": "",
-    "flash_success": "",
-    "loggedin": true,
-    "modules": {
-        "auth": true,
-        "confirm": true,
-        "lock": true,
-        "logout": true,
-        "oauth2": true,
-        "otp": true,
-        "recover": true,
-        "register": true,
-        "remember": true
-    },
-    "status": "success"
-}
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/2fa/totp/remove HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU2OTc0NjAwM3xEdi1CQkFFQ180SUFBUkFCRUFBQVVQLUNBQUlHYzNSeWFXNW5EQXNBQ1hSM2IyWmhZM1J2Y2daemRISnBibWNNQmdBRWRHOTBjQVp6ZEhKcGJtY01CUUFEZFdsa0JuTjBjbWx1Wnd3U0FCQjBaWE4wTVRaQVoyMWhhV3d1WTI5dHzlVBe7ocaPKr5q65XrOGra3K8nO92zliUulloeLx-bfw==
+> Content-Type: application/json
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 48
+> 
+* upload completely sent off: 48 out of 48 bytes
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Set-Cookie: csrf_token=VzJ9Qui3oWfwGI7CPJV5yXB4rH5Ei/UKK640zZpnrJY=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0NjA3OXxEdi1CQkFFQ180SUFBUkFCRUFBQUxmLUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18MtycnV81wGKxoMhh576pKnaWamRpk-4WfkCPgwuZ020=; Path=/; Expires=Sun, 29 Sep 2019 20:34:39 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 08:34:39 GMT
+< Content-Length: 389
+< 
+* Connection #0 to host localhost left intact
+{"csrf_token":"cuaFkoXH2IyDsF5Jps5ZAkCSkhWsRqgOx4nMp0tgST0l1PjQbXB563Oo0IuaWyDLMOo+a+jNXQTsJ/hq0Qflqw==","current_user_name":"","flash_error":"","flash_success":"","loggedin":true,"modules":{"auth":true,"auth-custom":true,"confirm":true,"lock":true,"logout":true,"oauth2":true,"recover":true,"recover-custom":true,"register":true,"register-custom":true,"remember":true},"status":"success"}
 
 ```
 
