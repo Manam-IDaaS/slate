@@ -1616,5 +1616,40 @@ or for google users
 				"Email":"",
    
 }
+```
+
+## Google Login with Manam [Manam]
+Consumer has a link in site to login user with manam and user want to login in manam with google ouath.
+This proscess has two step first step to authorization from google and the second step to get user information.
+
+### step 1: Authenticate user in google
+when user click on a link in site and want login with google login go to this page to enter email and password.
+for this step use this api.
+
+Tip:
+tenant_callback_url :  tenant define callback url.
+
+
+```python
+
+url = 'https://https://api.apieco.ir/oauth_google'
+headers = {'apieco_key': '<apieco_key>',               
+               'tenant_callback_url':'http://tenant.com/<tenant_google_callback>' # tenant confirm url
+               }
+r = requests.get(url, headers=headers).content
+
+
+```
+> The above command display google ouath for login user:
+
+
+
+After login go to tenant url with to parameters code and state this parameter used for the next state.
+
+### step 2: Display user information
+
+```shell
+curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/user_google_info -d '{"code": "<code>","state":"pseudo-random"}'
+```
 
 
