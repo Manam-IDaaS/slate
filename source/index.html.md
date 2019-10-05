@@ -31,7 +31,7 @@ Manam is IDaaS (Identity as a service).
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "Accept-Language":"en-ca,en;q=0.8,en-us;" https://api.apieco.ir/manam/auth/register -d '{"type":"[email|mobile]","confirm_url":"https://tenant.com/confirm","firstname": "myyfirstname","lastname":"mylastname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","national_code":"12907652",birthday:"1370-01-03"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email|mobile" -H "Accept-Language":"en-ca,en;q=0.8,en-us;" https://api.apieco.ir/manam/auth/register -d '{"confirm_url":"https://tenant.com/confirm","firstname": "myyfirstname","lastname":"mylastname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","national_code":"12907652",birthday:"1370-01-03"}'
 
 ```
 
@@ -104,7 +104,6 @@ None.
 
 Parameter | Type    | Description
 --------- | ------- | ---------------
-type* | string | email or mobile
 email+ |[string] | required when type is "email"
 mobile+|[number] | required when type is "mobile"
 mobile_seed+|[number] | required when type is "mobile"
@@ -230,7 +229,7 @@ cnf | The string that confirm registartion
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/send_confirm_email -d {userTpe:"email","email":"user@test.com","tenant_email":"info@tenant.com",confirm_url:"tenant.com/confirm"}
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email|mobile" https://api.apieco.ir/manam/auth/send_confirm_email -d {"email":"user@test.com","tenant_email":"info@tenant.com",confirm_url:"tenant.com/confirm"}
 ```
 
 ```javascript
@@ -355,7 +354,7 @@ confirm_url*| string
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/login -d '{"type":"[email|mobile]","email": "myemail@mail.com","password":"password"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email|mobile" https://api.apieco.ir/manam/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
 
 ```
 
