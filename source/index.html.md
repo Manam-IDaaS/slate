@@ -442,7 +442,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H
 > User-Agent: curl/7.58.0
 > Accept: */*
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 63
 > 
@@ -600,7 +600,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H
 > Accept: */*
 > Cookie: ab_blog=MTU2OTc0NDE4MHxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXzTigFKYnQo_iEVpF4n9OXJXJiV84Jx8sm9YWQNaOnqYw==;
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > 
 < HTTP/1.1 307 Temporary Redirect
@@ -637,7 +637,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 > User-Agent: curl/7.58.0
 > Accept: */*
 > Cookie: ab_blog=MTU2OTc0NDI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV81al9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVk5HVFZKQk4wbFNRbFpVV2xoV1JWZFROa2hGVVRSWlRGcE1ValpSUmxJR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01FZ0FRZEdWemRERTJRR2R0WVdsc0xtTnZiUVp6ZEhKcGJtY01FZ0FRZEhkdlptRmpkRzl5WDJGMWRHaGxaQVp6ZEhKcGJtY01CZ0FFZEhKMVpRPT18oYFsxLdUi7weJmG7F1I7dUkZtjdTNSbtHY8IJhObza4=;
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > 
 < HTTP/1.1 200 OK
@@ -682,7 +682,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > User-Agent: curl/7.58.0
 > Accept: */*
 > Cookie: ab_blog=MTU2OTc0NDI2NnxEdi1CQkFFQ180SUFBUkFCRUFBQV81al9nZ0FEQm5OMGNtbHVad3dOQUF0MGIzUndYM05sWTNKbGRBWnpkSEpwYm1jTUlnQWdVVk5HVFZKQk4wbFNRbFpVV2xoV1JWZFROa2hGVVRSWlRGcE1ValpSUmxJR2MzUnlhVzVuREFVQUEzVnBaQVp6ZEhKcGJtY01FZ0FRZEdWemRERTJRR2R0WVdsc0xtTnZiUVp6ZEhKcGJtY01FZ0FRZEhkdlptRmpkRzl5WDJGMWRHaGxaQVp6ZEhKcGJtY01CZ0FFZEhKMVpRPT18oYFsxLdUi7weJmG7F1I7dUkZtjdTNSbtHY8IJhObza4=;
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 17
 > Content-Type: application/x-www-form-urlencoded
@@ -709,7 +709,7 @@ You should use two factor authentication in your application if you want additio
 ### step1 : Login via password
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/login -d '{"email": "test16@gmail.com","password":"12345","type":"email"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/login -d '{"email": "test16@gmail.com","password":"12345","type":"email"}'
 
 ```
 
@@ -725,7 +725,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > User-Agent: curl/7.58.0
 > Accept: */*
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 63
 > 
@@ -750,7 +750,7 @@ code and recovery_code params are described in previous part (code comes from sm
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/validate -d '{"code": "326019","recovery_code":"hhdcj-q99w1"}' --cookie "ab_blog=MTU2OTc0NTQ5NnxEdi1CQkFFQ180SUFBUkFCRUFBQU52LUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18-RcNmidjCGEPnSWLXxHg4n6TdTpa8gCLQU47-K3UxAA="
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/validate -d '{"code": "326019","recovery_code":"hhdcj-q99w1"}' --cookie "ab_blog=MTU2OTc0NTQ5NnxEdi1CQkFFQ180SUFBUkFCRUFBQU52LUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18-RcNmidjCGEPnSWLXxHg4n6TdTpa8gCLQU47-K3UxAA="
 
 ```
 
@@ -768,7 +768,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > Accept: */*
 > Cookie: ab_blog=MTU2OTc0NTQ5NnxEdi1CQkFFQ180SUFBUkFCRUFBQU52LUNBQUVHYzNSeWFXNW5EQTRBREhSdmRIQmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18-RcNmidjCGEPnSWLXxHg4n6TdTpa8gCLQU47-K3UxAA=
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 48
 > 
@@ -797,7 +797,7 @@ Tips:
 
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/remove -d '{"code": "302922","recovery_code":"egir1-u4cut"}' --cookie "ab_blog=MTU2OTc0NTYwMnxEdi1CQkFFQ180SUFBUkFCRUFBQVVQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUN3QUpkSGR2Wm1GamRHOXlCbk4wY21sdVp3d0dBQVIwYjNSd3yRxbe0gnzqbmD2pbgqx8KkviJxktBCpWQ1otm2rccKxw==; "
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/2fa/totp/remove -d '{"code": "302922","recovery_code":"egir1-u4cut"}' --cookie "ab_blog=MTU2OTc0NTYwMnxEdi1CQkFFQ180SUFBUkFCRUFBQVVQLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUN3QUpkSGR2Wm1GamRHOXlCbk4wY21sdVp3d0dBQVIwYjNSd3yRxbe0gnzqbmD2pbgqx8KkviJxktBCpWQ1otm2rccKxw==; "
 
 
 ```
@@ -815,7 +815,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > Accept: */*
 > Cookie: ab_blog=MTU2OTc0NjAwM3xEdi1CQkFFQ180SUFBUkFCRUFBQVVQLUNBQUlHYzNSeWFXNW5EQXNBQ1hSM2IyWmhZM1J2Y2daemRISnBibWNNQmdBRWRHOTBjQVp6ZEhKcGJtY01CUUFEZFdsa0JuTjBjbWx1Wnd3U0FCQjBaWE4wTVRaQVoyMWhhV3d1WTI5dHzlVBe7ocaPKr5q65XrOGra3K8nO92zliUulloeLx-bfw==
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 48
 > 
@@ -864,7 +864,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > User-Agent: curl/7.58.0
 > Accept: */*
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 63
 > 
@@ -903,7 +903,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > Accept: */*
 > Cookie: ab_blog=MTU2OTY5ODcxN3xEdi1CQkFFQ180SUFBUkFCRUFBQUxmLUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRPT18q0sHMSHjZt7ADMGIlJBxWcj24xtY2bm6AMoYYkREuFI=;
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 27
 > 
@@ -943,7 +943,7 @@ curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H 
 > Accept: */*
 > Cookie: ab_blog=MTU2OTY5ODgyMHxEdi1CQkFFQ180SUFBUkFCRUFBQWJfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUZnQVVkSGR2Wm1GamRHOXlYMkYxZEdoZmRHOXJaVzRHYzNSeWFXNW5EQm9BR0ZoT1JFWXlRVk50VFc1c1ZtcFlibUZJUVhWM04xRTlQUT09fNk_hWEgtbU5b66gDIb5zgxHevAeTmQTp-PGcQxEyruC;
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 36
 > 
@@ -982,7 +982,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > Accept: */*
 > Cookie: ab_blog=MTU2OTY5ODkyNnxEdi1CQkFFQ180SUFBUkFCRUFBQVZfLUNBQUlHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUVnQVFkSGR2Wm1GamRHOXlYMkYxZEdobFpBWnpkSEpwYm1jTUJnQUVkSEoxWlE9PXw7Di416VQ-kG3rd-t1cYEr4ht6KNIUDduvud4Se2YfcA==
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 30
 > 
@@ -1021,7 +1021,7 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H
 > Accept: */*
 > Cookie: ab_blog=MTU2OTY5OTAzMnxEdi1CQkFFQ180SUFBUkFCRUFBQV85RF9nZ0FGQm5OMGNtbHVad3dGQUFOMWFXUUdjM1J5YVc1bkRCSUFFSFJsYzNReE5VQm5iV0ZwYkM1amIyMEdjM1J5YVc1bkRCSUFFSFIzYjJaaFkzUnZjbDloZFhSb1pXUUdjM1J5YVc1bkRBWUFCSFJ5ZFdVR2MzUnlhVzVuREF3QUNuTnRjMTl1ZFcxaVpYSUdjM1J5YVc1bkRBMEFDemt6TlRZeU56RTNNemd3Qm5OMGNtbHVad3dLQUFoemJYTmZiR0Z6ZEFaemRISnBibWNNREFBS01UVTJPVFk1T1RBek1nWnpkSEpwYm1jTURBQUtjMjF6WDNObFkzSmxkQVp6ZEhKcGJtY01DQUFHTWpJME16Z3d8ycJy0h7IEVRfA3UycamPYNpfevSiGekXrbtHpMrB7kI=
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 17
 > 
@@ -1063,7 +1063,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > User-Agent: curl/7.58.0
 > Accept: */*
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 63
 > 
@@ -1102,7 +1102,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > Accept: */*
 > Cookie: ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==;
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > Content-Length: 47
 > 
 * upload completely sent off: 47 out of 47 bytes
@@ -1129,7 +1129,7 @@ Tips:
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v --cookie ""ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==;" localhost:3000/auth/2fa/sms/remove -d '{"code":"224380","recovery_code":"h41cv-xp4ca"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v --cookie ""ab_blog=MTU2OTcwMzcxNXxEdi1CQkFFQ180SUFBUkFCRUFBQV80UF9nZ0FEQm5OMGNtbHVad3dOQUF0emJYTmZjR1Z1WkdsdVp3WnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUNnQUljMjF6WDJ4aGMzUUdjM1J5YVc1bkRBd0FDakUxTmprM01ETTNNVFVHYzNSeWFXNW5EQXdBQ25OdGMxOXpaV055WlhRR2MzUnlhVzVuREFnQUJqUTJORFkxTlE9PXxkXEBe1CwJ62xrTiTmvWGNQKB4Irbc8nV7Nx9ZIepWBA==;" localhost:3000/auth/2fa/sms/remove -d '{"code":"224380","recovery_code":"h41cv-xp4ca"}'
 
 ```
 
@@ -1146,7 +1146,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > Accept: */*
 > Cookie: ab_blog=MTU2OTczNzAzNHxEdi1CQkFFQ180SUFBUkFCRUFBQWRfLUNBQU1HYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMVFHZHRZV2xzTG1OdmJRWnpkSEpwYm1jTUN3QUpkSGR2Wm1GamRHOXlCbk4wY21sdVp3d0ZBQU56YlhNR2MzUnlhVzVuREFvQUNITnRjMTlzWVhOMEJuTjBjbWx1Wnd3TUFBb3hOVFk1TnpNMk9UWTN88eZJP4-UKCFdIUsOvrpFQkV1QsWkH1_6t1x_ePBwkh8=;
 > Content-Type: application/json
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 47
 > 
@@ -1648,7 +1648,7 @@ After login go to tenant url with to parameters code and state this parameter us
 ### step 2: Display user information
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/user_google_info -d '{"code": "<code>","state":"pseudo-random"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/user_google_info -d '{"code": "<code>","state":"pseudo-random"}'
 ```
 
 
