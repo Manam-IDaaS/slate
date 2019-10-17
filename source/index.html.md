@@ -424,7 +424,7 @@ One time passwords can be useful if users require a backup password in case they
 
 ### step1 :Login:
 ```shell
-curl -X POST -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/otp/login -d '{"email":"test@test.com","password":"88e69f31-70da285e-ebc276ee-e0b0f929"}'
+curl -X POST -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/otp/login -d '{"email":"test@test.com","password":"88e69f31-70da285e-ebc276ee-e0b0f929"}'
 ```
 
 > The above return this output for Login: (use this cookie for the next step)
@@ -457,12 +457,12 @@ curl -X POST -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost
 ```
 ### step2 :Display qr code 
 ```shell
-http -p BHbh GET  localhost:3000/auth/otp/add  Cookie:"ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" "X-Consumer-ID":"kiss_customer"  "user_type":"email"
+http -p BHbh GET  localhost:3000/auth/otp/add  Cookie:"ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" "apieco_key":"<apieco_key>"  "user_type":"email"
 ```
 
 ### step3 :send qr code 
 ```shell
-curl -X POST -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/otp/add --cookie  "ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" -d {"code":"953502"}
+curl -X POST -H "apieco_key:<apieco_key>" -H "user_type:email" -v  localhost:3000/auth/otp/add --cookie  "ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" -d {"code":"953502"}
 ```
 > The above return this output: (use this cookie for the next step)
 
@@ -476,7 +476,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > User-Agent: curl/7.58.0
 > Accept: */*
 > Cookie: ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=
-> X-Consumer-ID:kiss_customer
+> X-Consumer-ID:<X-Consumer-ID>
 > user_type:email
 > Content-Length: 13
 > Content-Type: application/x-www-form-urlencoded
@@ -499,7 +499,7 @@ use otp param as password in login for this sample a8632d34-037bf456-6b8216b8-16
 
 ## One Time Passwords (OTP) (Login) [IDaaS]
 ```shell
-http -p BHbh POST  localhost:3000/auth/otp/login  email="test@test.com" password="a8632d34-037bf456-6b8216b8-16fa0b96" "X-Consumer-ID":"kiss_customer"  "user_type":"email"
+http -p BHbh POST  localhost:3000/auth/otp/login  email="testotp5@test.com" password="a8632d34-037bf456-6b8216b8-16fa0b96" "apieco_key":"<apieco_key>"  "user_type":"email"
 ```
 > The above return this output
 ```shell
@@ -511,7 +511,7 @@ Content-Length: 81
 Content-Type: application/json
 Host: localhost:3000
 User-Agent: HTTPie/0.9.8
-X-Consumer-ID: kiss_customer
+X-Consumer-ID: <X-Consumer-ID>
 user_type: email
 
 {
@@ -539,7 +539,7 @@ Vary: Cookie
 Have to be login and use cookie
 
 ```shell
- http -p BHbh POST  localhost:3000/auth/otp/clear  email="testotp5@test.com" Cookie:"ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" "X-Consumer-ID":"kiss_customer"  "user_type":"email"
+ http -p BHbh POST  localhost:3000/auth/otp/clear  email="testotp5@test.com" Cookie:"ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" "apieco_key":"<apieco_key>"  "user_type":"email"
  ```
 > The above return this output.
 
@@ -553,7 +553,7 @@ Content-Type: application/json
 Cookie: ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=
 Host: localhost:3000
 User-Agent: HTTPie/0.9.8
-X-Consumer-ID: kiss_customer
+X-Consumer-ID: <X-Consumer-ID>
 user_type: email
 
 {
