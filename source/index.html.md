@@ -455,7 +455,7 @@ curl -X POST -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost
 * Connection #0 to host localhost left intact
 {"access_token":"","birthday":"","custome_fields":"\u003cinvalid Value\u003e","email":"test16@gmail.com","firstname":"ali","lastname":"lastname","location":"/","mobile":"\u003cinvalid Value\u003e","mobile_seed":"\u003cinvalid Value\u003e","national_code":"","role":"","status":"success","tenant_confirm_url":"","tenant_email":"","type":"email"}
 ```
-### step2 :show qr code 
+### step2 :Display qr code 
 ```shell
 http -p BHbh GET  localhost:3000/auth/otp/add  Cookie:"ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" "X-Consumer-ID":"kiss_customer"  "user_type":"email"
 ```
@@ -495,8 +495,103 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 
 ```
 
-use otp paramet as password in login for this sample a8632d34-037bf456-6b8216b8-16fa0b96
+use otp param as password in login for this sample a8632d34-037bf456-6b8216b8-16fa0b96
 
+## One Time Passwords (OTP) (Login) [IDaaS]
+```shell
+http -p BHbh POST  localhost:3000/auth/otp/login  email="test@test.com" password="a8632d34-037bf456-6b8216b8-16fa0b96" "X-Consumer-ID":"kiss_customer"  "user_type":"email"
+```
+> The above return this output
+```shell
+POST /auth/otp/login HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 81
+Content-Type: application/json
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+X-Consumer-ID: kiss_customer
+user_type: email
+
+{
+    "email": "testotp5@test.com",
+    "password": "a8632d34-037bf456-6b8216b8-16fa0b96"
+}
+
+HTTP/1.1 307 Temporary Redirect
+Content-Length: 35
+Content-Type: application/json
+Date: Thu, 17 Oct 2019 05:37:41 GMT
+Set-Cookie: csrf_token=wXxv3/JLBeADQanAi41lhBG9oBiI2QW+WAjBuUhTkaw=; Max-Age=31536000
+Set-Cookie: ab_blog=MTU3MTI5MDY2MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD189TdMJ4anx1kPWoKjyHbP74pVFCNxGRHIfERWzm4OVhY=; Path=/; Expires=Thu, 17 Oct 2019 17:37:41 GMT; Max-Age=43200
+Vary: Origin
+Vary: Cookie
+
+{
+    "location": "/",
+    "status": "success"
+}
+```
+
+## One Time Passwords (OTP) (Clear) [IDaaS]
+
+Have to be login and use cookie
+
+```shell
+ http -p BHbh POST  localhost:3000/auth/otp/clear  email="testotp5@test.com" Cookie:"ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" "X-Consumer-ID":"kiss_customer"  "user_type":"email"
+ ```
+> The above return this output.
+
+```shell
+POST /auth/otp/clear HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 30
+Content-Type: application/json
+Cookie: ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=
+Host: localhost:3000
+User-Agent: HTTPie/0.9.8
+X-Consumer-ID: kiss_customer
+user_type: email
+
+{
+    "email": "testotp5@test.com"
+}
+
+HTTP/1.1 200 OK
+Content-Length: 416
+Content-Type: application/json
+Date: Thu, 17 Oct 2019 05:46:49 GMT
+Set-Cookie: csrf_token=vqf+qB/xr4nMXC3iQUkkdJdnf69UTW8OeCtDtxBO05Y=; Max-Age=31536000
+Vary: Origin
+Vary: Cookie
+
+{
+    "csrf_token": "N93wFyUWLnjraXPY9TxmFDcaEy/3/sZzUdj3aAv6H6uJeg6/OueB8Sc1Xjq0dUJgoH1sgKOzqX0p87TfG7TMPQ==",
+    "current_user_name": "",
+    "flash_error": "",
+    "flash_success": "",
+    "loggedin": true,
+    "modules": {
+        "auth": true,
+        "auth-custom": true,
+        "confirm": true,
+        "lock": true,
+        "logout": true,
+        "oauth2": true,
+        "otp": true,
+        "recover": true,
+        "recover-custom": true,
+        "register": true,
+        "register-custom": true,
+        "remember": true
+    },
+    "otp_count": "0",
+    "status": "success"
+}
+ ```
 
 
 ## Register two factor authentication via Time-Based One Time Passwords(totp) (Enable) [IDaaS]
