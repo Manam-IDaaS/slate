@@ -418,6 +418,87 @@ email | The email that register
 password | The password to login
 
 
+## One Time Passwords (OTP) (Enable) [IDaaS]
+
+One time passwords can be useful if users require a backup password in case they lose theirs, or they're logging in on an untrusted computer. This module allows users to add one time passwords, clear them, or log in with them.
+
+### step1 :Login:
+```shell
+curl -X POST -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/otp/login -d '{"email":"test@test.com","password":"88e69f31-70da285e-ebc276ee-e0b0f929"}'
+```
+
+> The above return this output for Login: (use this cookie for the next step)
+
+```shell
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/login HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type: application/json
+> X-Consumer-ID:<X-Consumer-ID>
+> user_type:email
+> Content-Length: 63
+> 
+* upload completely sent off: 63 out of 63 bytes
+< HTTP/1.1 307 Temporary Redirect
+< Content-Type: application/json
+< Set-Cookie: csrf_token=nnDh5GdXsqe8WO/zzghf4/x8gpChDliLKaEBcXIE698=; Max-Age=31536000
+< Set-Cookie: ab_blog=MTU2OTc0MzY2MHxEdi1CQkFFQ180SUFBUkFCRUFBQUxmLUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUVnQVFkR1Z6ZERFMlFHZHRZV2xzTG1OdmJRPT18JzpeVTJkDDLhaFhd32c9JU2j3ZTRSV4sc8Byg954PVQ=; Path=/; Expires=Sun, 29 Sep 2019 19:54:20 GMT; Max-Age=43200
+< Vary: Origin
+< Vary: Cookie
+< Date: Sun, 29 Sep 2019 07:54:20 GMT
+< Content-Length: 344
+< 
+* Connection #0 to host localhost left intact
+{"access_token":"","birthday":"","custome_fields":"\u003cinvalid Value\u003e","email":"test16@gmail.com","firstname":"ali","lastname":"lastname","location":"/","mobile":"\u003cinvalid Value\u003e","mobile_seed":"\u003cinvalid Value\u003e","national_code":"","role":"","status":"success","tenant_confirm_url":"","tenant_email":"","type":"email"}
+```
+### step2 :show qr code 
+```shell
+http -p BHbh GET  localhost:3000/auth/otp/add  Cookie:"ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" "X-Consumer-ID":"kiss_customer"  "user_type":"email"
+```
+
+### step3 :send qr code 
+```shell
+curl -X POST -H "X-Consumer-ID:kiss_customer" -H "user_type:email" -v  localhost:3000/auth/otp/add --cookie  "ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=" -d {"code":"953502"}
+```
+> The above return this output: (use this cookie for the next step)
+
+```shell
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 3000 (#0)
+> POST /auth/otp/add HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: ab_blog=MTU3MTI4OTI4MXxEdi1CQkFFQ180SUFBUkFCRUFBQUx2LUNBQUVHYzNSeWFXNW5EQVVBQTNWcFpBWnpkSEpwYm1jTUV3QVJkR1Z6ZEc5MGNEVkFkR1Z6ZEM1amIyMD18aZXlqtfTBLoYX3jmZ1G1oAssiGOCUOtEoji8pcpda7k=
+> X-Consumer-ID:kiss_customer
+> user_type:email
+> Content-Length: 13
+> Content-Type: application/x-www-form-urlencoded
+> 
+* upload completely sent off: 13 out of 13 bytes
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Set-Cookie: csrf_token=abTY0+5pHK0o3i085bnWijoflsmD1bOFWOaspolvQ6c=; Max-Age=31536000
+< Vary: Origin
+< Vary: Cookie
+< Date: Thu, 17 Oct 2019 05:16:31 GMT
+< Content-Length: 444
+< 
+* Connection #0 to host localhost left intact
+{"csrf_token":"hIE14Y7tEKJZiD3xRvj7/Xz0WkhiPsMWjEt5ZEaq4HDtNe0yYIQMD3FWEM2jQS13RuvMgeHrcJPUrdXCz8Wj1w==","current_user_name":"","flash_error":"","flash_success":"","loggedin":true,"modules":{"auth":true,"auth-custom":true,"confirm":true,"lock":true,"logout":true,"oauth2":true,"otp":true,"recover":true,"recover-custom":true,"register":true,"register-custom":true,"remember":true},"otp":"a8632d34-037bf456-6b8216b8-16fa0b96","status":"success"}
+
+```
+
+use otp paramet as password in login for this sample a8632d34-037bf456-6b8216b8-16fa0b96
+
+
+
 ## Register two factor authentication via Time-Based One Time Passwords(totp) (Enable) [IDaaS]
 
 You should use two factor authentication in your application if you want additional security beyond that of just simple passwords. Each 2fa module supports a different mechanism for verifying a second factor of authentication from a user.
