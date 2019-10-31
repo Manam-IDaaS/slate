@@ -1673,7 +1673,7 @@ Contact to admin for give customer-token
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/get_manam_user_info/<email>
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/get_manam_user_info -d '{"email": "test@test.com","type":"email"}'
 
 ```
 
@@ -1681,23 +1681,16 @@ curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  ht
 
 ```json
 
-{
-        "email":"...",
-        "meli_code":"...",
-        "picture":"...",
-        "address":"...",
-        "postal_code":"...",
-        "birthday":"...",
-        "marital_status":"...",
-        "facebook_id":"...",
-        "instagram_id":"...",
-        "twitter_id":"...",
-        "linkedIn_id":"...",
-        "document":"...",
-        "mobile":"...",
-        "telephone":"..."
-   
-}
+{"NationalCode":"66666",
+"Birthday":"1930-03-01",
+"Mobile":"9356315367",
+"Firstname":"...",
+"Lastname":"...",
+"Role":"...",
+"TenantEmail":"info@tenant.com",
+"TenantConfirmURL":"tenant.com/confirm",
+"CustomFields":"{\"name\": \"name\", \"address\": \"address\"}",
+"Type":"email"}
 
 ```
 or for google users
