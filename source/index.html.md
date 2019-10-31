@@ -1568,7 +1568,7 @@ email | The email that register
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/edit_user -d '{"userType":"[email|mobile]","email":"mytest@gmail.com","melicode":"12344", "picture":"butypic","address":"address", "postal_code":"posss","birthday":"1990-02-01","marital_status":"single","facebook_id":"facebook_id","instagram_id":"instagram_id","twitter_id":"twitter_id","linkedIn_id":"linkedIn_id","document":"document1","mobile":"091223423","telephone":"091383184"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/edit_user -d '{"type":"[email|mobile]","email":"mytest@gmail.com","national_code":"12344","birthday":"1990-02-01","mobile":"091223423","custom_field":"{"address":"..","postal_code":"..."}"}'
 
 
 ```
@@ -1583,20 +1583,20 @@ $.ajax({
     dataType: "json",
     type : "POST",
     data: {
-            "userType":"[email|mobile]",
+            "type":"[email|mobile]",
             "email":"mytest@gmail.com",
-           "melicode":"12344",
-           "picture":"butypic",
-           "address":"address",
-           "postal_code":"posss",
-           "birthday":"1990-01-02",
-           "marital_status":"single",
-           "facebook_id":"facebook_id",
-           "instagram_id":"instagram_id",
-           "twitter_id":"twitter_id",
-           "linkedIn_id":"linkedIn_id",
-           "document":"document1",
-           "mobile":"091223423",
+           "national_code":"12344",
+           "email":"myemail@mail.com",// required when type is "email"
+            "tenant_email": "info@tenant.com" // required when type is "email"
+            "tenant_confirm_url":"tenant.com/tenant" //required
+            "mobile":"09111087815", // required when type is "mobile"
+            "mobile_seed":"+98",        
+            "firstname":"firstname",
+            "lastname":"lastname",    
+            "national_code":"12907652", 
+            "birthday":"1990-04-05",
+            "roles": [],
+            "custome_fields":[{"phone":"887219031":"address":"Tehran"}]
            "telephone":"091383184"}
     success : function(r) {
       console.log(r);
