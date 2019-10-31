@@ -1504,7 +1504,7 @@ This endpoint RefreshToken create new refresh token for users.
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/view_user/<email>
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>"  https://api.apieco.ir/manam/view_user -d {"email":"<email>","type":"email"}
 
 
 ```
@@ -1517,7 +1517,7 @@ $.ajax({
                 
             },
     dataType: "json",
-    type : "GET",
+    type : "POST",
     success : function(r) {
       console.log(r);
     }
@@ -1527,22 +1527,22 @@ $.ajax({
 > The above command returns JSON structured like this:
 
 ```json
-{
-  {"email":"...",
-  "meli_code":"...",
-  "picture":"...",
-  "address":"...",
-  "postal_code":"...",
-  "birthday":"...",
-  "marital_status":"...",
-  "facebook_id":"...",
-  "instagram_id":"...",
-  "twitter_id":"...",
-  "linkedIn_id":"...",
-  "document":"...",
-  "mobile":"...",
-  "telephone":"..."}'
-}
+
+{"access_token":"...",
+ "birthday":"",
+ "custome_fields":"",
+ "email":"test15@gmail.com",
+ "firstname":"ali",
+ "lastname":"lastname",
+ "location":"/",
+ "mobile":"",
+ "mobile_seed":"" ,
+ "national_code":"",
+ "role":"",
+ "status":"success",
+ "tenant_confirm_url":"",
+ "tenant_email":"",
+ "type":"email"}
 ```
 
 This endpoint display user info user.
