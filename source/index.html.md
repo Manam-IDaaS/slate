@@ -1827,12 +1827,12 @@ curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:mobile" -v ttps://api.apieco.ir/manam/auth/delete_user -d '{"mobile":"<mobile>"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:mobile" -v ttps://api.apieco.ir/manam/delete_user -d '{"mobile":"<mobile>"}'
 
 ```
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v ttps://api.apieco.ir/manam/auth/delete_user -d '{"email":"<email>"}'
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email" -v ttps://api.apieco.ir/manam/delete_user -d '{"email":"<email>"}'
 
 ```
 
