@@ -230,7 +230,7 @@ cnf | The string that confirm registartion
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email|mobile" https://api.apieco.ir/manam/auth/send_confirm_email -d {"email":"user@test.com","tenant_email":"info@tenant.com",confirm_url:"tenant.com/confirm"}
+curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email|mobile" https://api.apieco.ir/manam/auth/send_confirm_email -d {"email":"user@test.com","tenant_email":"info@tenant.com",confirm_url:"tenant.com/confirm"}
 ```
 
 ```javascript
