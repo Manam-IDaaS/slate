@@ -230,7 +230,7 @@ cnf | The string that confirm registartion
 
 ```shell
 
-curl -X GET -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email|mobile" https://api.apieco.ir/manam/auth/send_confirm_email -d {"email":"user@test.com","tenant_email":"info@tenant.com",confirm_url:"tenant.com/confirm"}
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/send_confirm_email -d {"email":"user@test.com"}
 ```
 
 ```javascript
@@ -243,7 +243,7 @@ $.ajax({
             },
     dataType: "json",
     type : "POST",
-    data:{"email":"user@test.com","tenant_email":"info@tenan.com",tenant_confirm_url:"tenant.com/confirm"}
+    data:{"email":"user@test.com"}
     success : function(r) {
       console.log(r);
     }
@@ -258,10 +258,10 @@ $.ajax({
 if status code is 200:
 ```json
 {
-"location": "/",
-"message": "You have successfully confirmed your account.",
-"status": "success"
-}
+"location":"/",
+ "message":"Please verify your account, an e-mail has been sent to you.",
+ "status":"success"
+ }
 ```
 if status code is 401:
 ```json
@@ -271,6 +271,13 @@ if status code is 401:
 "status": "unsuccess"
 }
 ```
+or if user not exsist:
+```json
+{
+{"csrf_token":"myc7AsiXKoaIYxn+xgB0OJG0z0uxqwTUcv/sz1LTKNJRTJEfJ+g4MCwbaEMhorGKjWglsHmvsEqLjKkJD8iMNA==","current_user_name":"","errors":"{\"msg\":\"User does not exist\",\"statusCode\":\"404\"}","flash_error":"","flash_success":"","loggedin":false,"modules":{"auth":true,"auth-custom":true,"confirm":true,"lock":true,"logout":true,"oauth2":true,"otp":true,"recover":true,"recover-custom":true,"register":true,"register-custom":true,"remember":true},"status":"failure"}
+}
+```
+
 
 This endpoint send new confirmation for mobile users on Manam.
 
