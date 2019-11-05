@@ -292,7 +292,7 @@ This endpoint send new confirmation for mobile users on Manam.
 Parameter | Description
 --------- | -----------
 mobile* | string
-confirm_url*| string
+
 
 
 
@@ -300,7 +300,7 @@ confirm_url*| string
 
 ```shell
 
-curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/send_confirm_sms -d {"mobile":"09171929716",confirm_url:"tenant.com/confirm"}
+curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" https://api.apieco.ir/manam/auth/send_confirm_sms -d {"mobile":"09171929716"}
 ```
 
 ```javascript
@@ -313,7 +313,7 @@ $.ajax({
             },
     dataType: "json",
     type : "POST",
-    data:{"mobile":"09171929716",confirm_url:"tenant.com/confirm"}
+    data:{"mobile":"09171929716"}
     success : function(r) {
       console.log(r);
     }
@@ -325,11 +325,11 @@ $.ajax({
 
 if status code is 200:
 ```json
-{
-"location": "/",
-"message": "You have successfully confirmed your account.",
-"status": "success"
-}
+
+{"location":"/",
+ "message":"Please verify your account, an SMS has been sent to you.",
+ "status":"success"
+ }
 ```
 if status code is 401:
 ```json
@@ -339,6 +339,12 @@ if status code is 401:
 "status": "unsuccess"
 }
 ```
+
+if not exsit
+```json
+{"csrf_token":"y/yR1teYjNRBkRpJgFg/PtBuOgryWUAtBfnjhSXInF6j7oDlfUZNCiBHIbM66AHt8adg8e8DLCU9aLmsiXdl5Q==","current_user_name":"","errors":"{\"msg\":\"User does not exist\",\"statusCode\":\"404\"}","flash_error":"","flash_success":"","loggedin":false,"modules":{"auth":true,"auth-custom":true,"confirm":true,"lock":true,"logout":true,"oauth2":true,"otp":true,"recover":true,"recover-custom":true,"register":true,"register-custom":true,"remember":true},"status":"failure"}
+```
+
 
 This endpoint send new confirmation for mobile users on Manam.
 
