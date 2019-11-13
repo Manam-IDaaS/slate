@@ -30,6 +30,7 @@ Manam is IDaaS (Identity as a service).
 ## Register [IDaaS]
 
 
+
 ```shell
 
 curl -X POST -H "Content-Type: application/json" -H "apieco_key:<apieco_key>" -H "user_type:email|mobile" -H "Accept-Language":"en-ca,en;q=0.8,en-us;" https://api.apieco.ir/manam/auth/register -d '{"confirm_url":"https://tenant.com/confirm","firstname": "myyfirstname","lastname":"mylastname","email": "myemail@gmail.com","password":"12345","confirm_password":"12345","national_code":"12907652",birthday:"1370-01-03"}'
